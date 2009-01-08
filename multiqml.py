@@ -1,7 +1,8 @@
 import sys
 import os
 import pdb
-#import copy
+
+from osgeo import gdal
 
 from PyQt4.QtCore import Qt, QObject, SIGNAL, QString, QStringList, QDir, \
 pyqtSignature
@@ -43,7 +44,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 				myMessage = layer.loadNamedStyle(self.fileNameStyle)
 				layer.triggerRepaint()
 		else:
-			QMessageBox.critical(self, self.tr("Error!"), self.tr("Style not loaded")); 
+			QMessageBox.critical(self, self.tr("Error"), self.tr("Style not loaded")); 
 
 	@pyqtSignature( "" )
 	def on_pbnDefaultStyle_clicked(self):
@@ -82,36 +83,32 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 	#		self.lvRasterLayers.emit( SIGNAL( "activated(QModelIndex)" ), self.lvRasterLayers.model().index( 0 ) )
 		else:
 			self.lvRasterLayers.setSelectionMode(QAbstractItemView.MultiSelection)
-
-#	@pyqtSignature( "" )
-#	def on_pbnReloadLayers_clicked(self):
-#		pdb.set_trace(  )
-#		self.modelListView.removeRows(0, self.modelListView.rowCount()) 
-#		self.mCanvas.clear(  )
-#		self.loadRasterLayers(  )
-#		for i in range(self.iface.mapCanvas().layerCount()):
-#			layersIds.append(self.iface.mapCanvas().layer(i).name())
-#			layer = self.iface.mapCanvas().layer(i)
-#			myMessage = layer.saveDefaultStyle()
-#		model.setStringList(layersIds)
-#		self.lvRasterLayers.setModel(self.modelListView)
-#		self.lvRasterLayers.reset()
-#		self.lvRasterLayers.setSelectionMode(QAbstractItemView.MultiSelection)
+#			self.lvRasterLayers.selectAll()
 
 	def loadRasterLayers( self ):
 #		pdb.set_trace(  )
 		layersIds = QStringList()
 		self.mapLayers = dict( QgsMapLayerRegistry.instance(  ).mapLayers(  ) )
+		self.countRasterPixelsList = []
 		layers = []
 		for k in self.mapLayers.keys(  ):
-			layersIds.append( self.mapLayers[k].name(  ) )
-			myMessage = self.mapLayers[k].saveDefaultStyle()
-			layers.append( QgsMapCanvasLayer( self.mapLayers[k] ) )
+			if self.mapLayers[k].type() == QgsMapLayer.RasterLayer:
+				layersIds.append( self.mapLayers[k].name(  ) )
+				myMessage = self.mapLayers[k].saveDefaultStyle()
+				layers.append( QgsMapCanvasLayer( self.mapLayers[k] ) )
+
+				ds = gdal.Open( str( self.mapLayers[k].source() ) )
+				colorTable = ds.GetRasterBand( 1 ).GetRasterColorTable()
+				if colorTable:
+					self.countRasterPixelsList.append( colorTable.GetCount() )
+				else:
+					self.countRasterPixelsList.append( 0 )
 
 		self.lvRasterLayers.setModel( QStringListModel( layersIds, self ) )
 		self.lvRasterLayers.setSelectionMode(QAbstractItemView.MultiSelection)
 		self.lvRasterLayers.setEditTriggers( QAbstractItemView.NoEditTriggers )
 		self.lvRasterLayers.selectAll()
+
 
 		if layers != []: self.mCanvas.setLayerSet( layers )
 		self.mCanvas.freeze( False )
@@ -129,22 +126,28 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 				os.remove(layerQmlSrc)
 		event.accept()
 
+
 	@pyqtSignature( "QModelIndex" )
 	def on_lvRasterLayers_clicked( self, index ):
 #	def on_lvRasterLayers_activated( self, index ):
 		if self.chbxViewLayers.checkState() == Qt.Checked:
 			layer = self.mCanvas.layer( index.row() )
+			print layer
 			if layer:
-				indexTransp = QStringList()
-				for i in range( 16 ):
-					indexTransp.append( str( i ) )
-				self.lvTransparency.setModel( QStringListModel( indexTransp, self ) )
-				self.lvTransparency.setEditTriggers( QAbstractItemView.NoEditTriggers )
+				print self.countRasterPixelsList
+				rasterPixelsList = QStringList()
+				if self.countRasterPixelsList == []:
+					self.lvTransparency.model().removeRows( 0, self.lvTransparency.model().rowCount() )
+				else:
+					for i in range( self.countRasterPixelsList[index.row()] ):
+						rasterPixelsList.append( str( i ) )
+					self.lvTransparency.setModel( QStringListModel( rasterPixelsList, self ) )
+					self.lvTransparency.setEditTriggers( QAbstractItemView.NoEditTriggers )
 
 				self.mCanvas.clear()
 				self.mCanvas.setCurrentLayer( layer )
-				self.mCanvas.refresh()
 				self.mCanvas.setExtent( layer.extent() )
+#				self.mCanvas.refresh()
 				layer.triggerRepaint()
 
 	@pyqtSignature( "QModelIndex" )
@@ -155,7 +158,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			if currentLayer:
 				myTransparentSingleValuePixelList = currentLayer.rasterTransparency().transparentSingleValuePixelList()
 				for transparentPixel in myTransparentSingleValuePixelList:
-					if transparentPixel.pixelValue == index.row():	
+					if transparentPixel.pixelValue == index.row():
 						myTransparentSingleValuePixelList[myTransparentSingleValuePixelList.index( transparentPixel )].percentTransparent = \
 							( self.vslValueTransparency.value() / 255 ) * 100
 				else:
@@ -170,7 +173,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 	def on_vslValueTransparency_valueChanged( self, val ):
 		self.lbTransparencyValuePercant.setText( self.tr( "%1%" ).arg( int( ( val / 255.0 ) * 100 ) ) )
 		if self.chbxTransparentLayer.checkState() == Qt.Checked:
-			self.mCanvas.currentLayer().setTransparency( val )
+			self.mCanvas.currentLayer().setTransparency( 255 - val )
 			self.mCanvas.currentLayer().triggerRepaint()
 
 	def on_chbxTransparentLayer_stateChanged( self, state ):
