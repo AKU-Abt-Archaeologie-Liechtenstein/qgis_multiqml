@@ -21,13 +21,13 @@ class MultiQmlPlugin():
 		self.iface.removePluginMenu( "&MultiQml", self.action )
 
 	def run( self ):
-		print "RUN!!!"
 		MultiQmldlg = MultiQmlDlg( self.iface.mainWindow(  ) )
+#		MultiQmldlg = MultiQmlDlg( None )
 		MultiQmldlg.show()
 
 
-#if __name__ == "__main__":
-#	app = QApplication( sys.argv )
-#	pluginWidget = MultiQmlPlugin( None )
-#	pluginWidget.run(  )
-#	sys.exit( app.exec_(  ) )
+if __name__ == "__main__":
+	app = QApplication( sys.argv )
+	pluginWidget = MultiQmlPlugin( None )
+	pluginWidget.run(  )
+	sys.exit( app.exec_(  ) )

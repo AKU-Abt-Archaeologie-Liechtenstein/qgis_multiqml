@@ -5,272 +5,78 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>896</width>
-    <height>514</height>
+    <width>336</width>
+    <height>237</height>
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>Dialog</string>
+   <string>Assign style</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_2" >
-   <item>
-    <layout class="QVBoxLayout" name="verticalLayout" >
-     <item>
-      <widget class="QPushButton" name="pbnLoadStyle" >
-       <property name="text" >
-        <string>Load Style ...</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pbnDefaultStyle" >
-       <property name="text" >
-        <string>Restory Default Style</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pbnLoadColormapFromBand" >
-       <property name="text" >
-        <string>Load Colormap From Band</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pbnClose" >
-       <property name="text" >
-        <string>Close</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label" >
-       <property name="text" >
-        <string>Raster Layers:</string>
-       </property>
-       <property name="buddy" >
-        <cstring>lvRasterLayers</cstring>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout" >
-       <item>
-        <widget class="QCheckBox" name="chbxSelectAllLayers" >
-         <property name="text" >
-          <string>Select all</string>
-         </property>
-         <property name="checked" >
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="chbxViewLayers" >
-         <property name="text" >
-          <string>View</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QListView" name="lvRasterLayers" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Expanding" hsizetype="Minimum" >
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>180</width>
-         <height>16777215</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2" >
-     <item>
-      <widget class="QCheckBox" name="chbxTransparentLayer" >
-       <property name="text" >
-        <string>Transnparent</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_2" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text" >
-        <string>Transparent
-pixels:</string>
-       </property>
-       <property name="buddy" >
-        <cstring>lvTransparency</cstring>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QListView" name="lvTransparency" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="MinimumExpanding" hsizetype="Fixed" >
-         <horstretch>100</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>100</width>
-         <height>16777215</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QGridLayout" name="gridLayout" >
-     <property name="horizontalSpacing" >
-      <number>1</number>
+  <layout class="QGridLayout" name="gridLayout" >
+   <item row="0" column="0" >
+    <widget class="QLabel" name="label" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <item rowspan="5" row="1" column="0" >
-      <widget class="QSlider" name="vslValueTransparency" >
-       <property name="minimum" >
-        <number>0</number>
-       </property>
-       <property name="maximum" >
-        <number>255</number>
-       </property>
-       <property name="value" >
-        <number>255</number>
-       </property>
-       <property name="orientation" >
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="invertedAppearance" >
-        <bool>false</bool>
-       </property>
-       <property name="invertedControls" >
-        <bool>false</bool>
-       </property>
-       <property name="tickPosition" >
-        <enum>QSlider::TicksBelow</enum>
-       </property>
-       <property name="tickInterval" >
-        <number>5</number>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1" >
-      <widget class="QLabel" name="label_5" >
-       <property name="text" >
-        <string>Full</string>
-       </property>
-       <property name="buddy" >
-        <cstring>vslValueTransparency</cstring>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1" >
-      <spacer name="verticalSpacer_2" >
-       <property name="orientation" >
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0" >
-        <size>
-         <width>30</width>
-         <height>205</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="3" column="1" >
-      <widget class="QLabel" name="lbTransparencyValuePercant" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Maximum" hsizetype="Fixed" >
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize" >
-        <size>
-         <width>37</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize" >
-        <size>
-         <width>37</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="frameShape" >
-        <enum>QFrame::NoFrame</enum>
-       </property>
-       <property name="text" >
-        <string>100%</string>
-       </property>
-       <property name="buddy" >
-        <cstring>vslValueTransparency</cstring>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1" >
-      <spacer name="verticalSpacer" >
-       <property name="orientation" >
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0" >
-        <size>
-         <width>30</width>
-         <height>205</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="5" column="1" >
-      <widget class="QLabel" name="label_3" >
-       <property name="text" >
-        <string>None</string>
-       </property>
-       <property name="buddy" >
-        <cstring>vslValueTransparency</cstring>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0" colspan="2" >
-      <widget class="QSpinBox" name="sbxValueTransparency" >
-       <property name="maximum" >
-        <number>255</number>
-       </property>
-       <property name="value" >
-        <number>255</number>
-       </property>
-      </widget>
-     </item>
-    </layout>
+     <property name="text" >
+      <string>Map layers:</string>
+     </property>
+     <property name="buddy" >
+      <cstring>lvMapLayers</cstring>
+     </property>
+    </widget>
    </item>
-   <item>
-    <widget class="QFrame" name="canvasFrame" >
+   <item rowspan="5" row="1" column="0" >
+    <widget class="QListView" name="lvMapLayers" >
      <property name="sizePolicy" >
       <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="frameShape" >
-      <enum>QFrame::StyledPanel</enum>
+     <property name="maximumSize" >
+      <size>
+       <width>180</width>
+       <height>16777215</height>
+      </size>
      </property>
-     <property name="frameShadow" >
-      <enum>QFrame::Raised</enum>
+    </widget>
+   </item>
+   <item row="1" column="1" >
+    <widget class="QPushButton" name="pbnLoadStyle" >
+     <property name="text" >
+      <string>Load style ...</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" >
+    <widget class="QPushButton" name="pbnRestoreDefaultStyle" >
+     <property name="text" >
+      <string>Restore default style</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1" >
+    <widget class="QPushButton" name="pbnLoadColormapFromBand" >
+     <property name="text" >
+      <string>Load colormap from band</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" >
+    <widget class="QPushButton" name="pbnSelectAllLayers" >
+     <property name="text" >
+      <string>Select all layers</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1" >
+    <widget class="QPushButton" name="pbnClose" >
+     <property name="text" >
+      <string>Close</string>
      </property>
     </widget>
    </item>
@@ -278,46 +84,10 @@ pixels:</string>
  </widget>
  <tabstops>
   <tabstop>pbnLoadStyle</tabstop>
-  <tabstop>lvRasterLayers</tabstop>
-  <tabstop>pbnDefaultStyle</tabstop>
-  <tabstop>pbnLoadColormapFromBand</tabstop>
+  <tabstop>lvMapLayers</tabstop>
+  <tabstop>pbnRestoreDefaultStyle</tabstop>
   <tabstop>pbnClose</tabstop>
-  <tabstop>lvTransparency</tabstop>
-  <tabstop>vslValueTransparency</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>vslValueTransparency</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>sbxValueTransparency</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>327</x>
-     <y>40</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>340</x>
-     <y>21</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>sbxValueTransparency</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>vslValueTransparency</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>354</x>
-     <y>21</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>326</x>
-     <y>128</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
