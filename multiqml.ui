@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>336</width>
-    <height>237</height>
+    <width>330</width>
+    <height>230</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -46,16 +46,16 @@
     </widget>
    </item>
    <item row="1" column="1" >
-    <widget class="QPushButton" name="pbnLoadStyle" >
+    <widget class="QPushButton" name="pbnApplyStyle" >
      <property name="text" >
-      <string>Load style ...</string>
+      <string>Apply style ...</string>
      </property>
     </widget>
    </item>
    <item row="2" column="1" >
     <widget class="QPushButton" name="pbnRestoreDefaultStyle" >
      <property name="text" >
-      <string>Restore default style</string>
+      <string>Restore initial style</string>
      </property>
     </widget>
    </item>
@@ -83,7 +83,7 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>pbnLoadStyle</tabstop>
+  <tabstop>pbnApplyStyle</tabstop>
   <tabstop>lvMapLayers</tabstop>
   <tabstop>pbnRestoreDefaultStyle</tabstop>
   <tabstop>pbnClose</tabstop>

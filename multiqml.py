@@ -4,10 +4,8 @@ import pdb
 
 from osgeo import gdal
 
-from PyQt4.QtCore import Qt, QObject, SIGNAL, QString, QStringList, QDir, \
-pyqtSignature
-from PyQt4.QtGui import QDialog, QAbstractItemView, QHBoxLayout, QPalette, \
-QStringListModel, QFileDialog, QMessageBox
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 from qgis.core import *
 from qgis.gui import *
 from ui_multiqml import Ui_MultiQmlForm
@@ -32,13 +30,16 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 #		self.mCanvas.setCanvasColor( Qt.white )
 #		layout.addWidget( self.mCanvas )
 #		print self.mCanvas.backgroundRole(  )
+		self.readSettings()
 
 		self.loadMapLayers()
 
 	@pyqtSignature( "" )
-	def on_pbnLoadStyle_clicked(self):
+	def on_pbnApplyStyle_clicked(self):
 #		pdb.set_trace(  )
-		self.fileNameStyle = QFileDialog.getOpenFileName(self, self.tr("Open style"), QDir.currentPath(), self.tr("QGIS Layer Style File (*.qml)"))
+		myLastUsedDir = self.settings.value( "multiqmlplugin/lastStyleDir" ).toString()
+		self.fileNameStyle = QFileDialog.getOpenFileName(self, self.tr("Open style"), myLastUsedDir, self.tr("QGIS Apply Style File (*.qml)"))
+
 		if not self.fileNameStyle.isEmpty():
 			selected = self.lvMapLayers.selectedIndexes()
 			print selected
@@ -48,8 +49,9 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 				myMessage = layer.loadNamedStyle(self.fileNameStyle)
 				print myMessage
 				layer.triggerRepaint()
+			self.settings.setValue( "multiqmlplugin/lastStyleDir", QVariant( os.path.dirname( unicode( self.fileNameStyle ) ) ) )
 		else:
-			QMessageBox.critical(self, self.tr("Error"), self.tr("Style not loaded")); 
+			QMessageBox.information(self, self.tr("Information"), self.tr("Style not applied"));
 
 	@pyqtSignature( "" )
 	def on_pbnRestoreDefaultStyle_clicked(self):
@@ -98,6 +100,12 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 #		layers = []
 		for i in range( len( self.mapLayers ) ):
 			layersNameList.append( self.mapLayers[i].name() )
+
+			src = unicode( self.mapLayers[i].source() )
+			layerQmlSrc = os.path.splitext( src )[0] + '.qml'
+			if os.path.exists( layerQmlSrc ):
+				os.rename( layerQmlSrc, layerQmlSrc + ".old" )
+
 			myMessage = self.mapLayers[i].saveDefaultStyle()
 ##			layers.append( QgsMapCanvasLayer( self.mapLayers[k] ) )
 			print myMessage
@@ -120,14 +128,18 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 		
 	@pyqtSignature( "" )
 	def on_pbnClose_clicked(self):
+		self.writeSettings()
 		self.close()
 
 	def closeEvent( self, event ):
 		for i in range( len( self.mapLayers ) ):
-			src = str( self.mapLayers[i].source() )
+			src = unicode( self.mapLayers[i].source() )
 			layerQmlSrc = os.path.splitext( src )[0] + '.qml'
 			if os.path.exists( layerQmlSrc ):
 				os.remove(layerQmlSrc)
+
+			if os.path.exists( layerQmlSrc + ".old" ):
+				os.rename( layerQmlSrc + ".old", layerQmlSrc )
 		event.accept()
 
 #	@pyqtSignature( "QModelIndex" )
@@ -183,3 +195,15 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 #	def on_chbxTransparentLayer_stateChanged( self, state ):
 #		if state == Qt.Checked:
 #			self.vslValueTransparency.emit( SIGNAL( "valueChanged( int )" ), self.vslValueTransparency.value() )
+
+	def readSettings(self):
+		self.settings = QSettings( "Gis-Lab", "MultiQml" )
+		self.resize( self.settings.value( "multiqmlplugin/size", QVariant( QSize( 330, 230 ) ) ).toSize() )
+		self.move( self.settings.value( "multiqmlplugin/pos", QVariant( QPoint( 0, 0 ) ) ).toPoint() )
+
+	def writeSettings(self):
+		self.settings = QSettings( "Gis-Lab", "MultiQml" )
+		self.settings.setValue( "multiqmlplugin/size", QVariant( self.size() ) )
+		self.settings.setValue( "multiqmlplugin/pos", QVariant( self.pos() ) )
+
+
