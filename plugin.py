@@ -13,12 +13,14 @@ class MultiQmlPlugin():
 	def initGui( self ):
 		print "Init Gui"
 		self.action = QAction( "MultiQml", self.iface.mainWindow(  ) )
+		self.action.setWhatsThis("Apply single qml to multiple layers.")
 		QObject.connect( self.action, SIGNAL( "activated(  )" ), self.run )
 		self.iface.addPluginToMenu( "&MultiQml", self.action )
 		self.iface.addToolBarIcon(self.action)
 
 	def unload( self ):
 		self.iface.removePluginMenu( "&MultiQml", self.action )
+		self.iface.removeToolBarIcon(self.action)
 
 	def run( self ):
 		MultiQmldlg = MultiQmlDlg( self.iface.mainWindow(  ) )
