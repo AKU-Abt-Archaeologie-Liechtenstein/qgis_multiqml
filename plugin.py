@@ -1,18 +1,18 @@
-#! /usr/bin/python
-
 import sys
 #import pdb
 from PyQt4.QtCore import QObject, SIGNAL
-from PyQt4.QtGui import QMainWindow, QApplication, QAction
+from PyQt4.QtGui import QMainWindow, QApplication, QAction, QIcon
+
 from multiqml import MultiQmlDlg
+
+import resources
 
 class MultiQmlPlugin():
 	def __init__( self, iface ):
 		self.iface = iface
 
 	def initGui( self ):
-		print "Init Gui"
-		self.action = QAction( "MultiQml", self.iface.mainWindow(  ) )
+		self.action = QAction( QIcon( ":/plugins/multiqml/icon.png" ), "MultiQml", self.iface.mainWindow(  ) )
 		self.action.setWhatsThis("Apply single qml to multiple layers.")
 		QObject.connect( self.action, SIGNAL( "activated(  )" ), self.run )
 		self.iface.addPluginToMenu( "&MultiQml", self.action )

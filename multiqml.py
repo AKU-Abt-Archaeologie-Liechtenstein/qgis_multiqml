@@ -82,9 +82,9 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			if not isLoaded: self.myPluginMessage( "Unable to restory the initial style for layer \"%s\"\n\"%s\"." % ( layer.name(), myMessage ), "critical" )
 			layer.triggerRepaint()
 	
-	@pyqtSignature( "" )
-	def on_pbnLoadColormapFromBand_clicked(self):
-		self.myPluginMessage( "A function not implement, yet.", "information" )
+#	@pyqtSignature( "" )
+#	def on_pbnLoadColormapFromBand_clicked(self):
+#		self.myPluginMessage( "A function not implement, yet.", "information" )
 #		myColorRampList = []
 #		selected = self.lvMapLayers.selectedIndexes()
 #		for i in selected:
@@ -137,6 +137,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 		self.lvMapLayers.setModel( QStringListModel( layersNameList, self ) )
 		self.lvMapLayers.setSelectionMode(QAbstractItemView.MultiSelection)
 		self.lvMapLayers.setEditTriggers( QAbstractItemView.NoEditTriggers )
+		self.lvMapLayers.setCurrentIndex( self.lvMapLayers.model().index( 0 ) )
 #		self.lvMapLayers.selectAll()
 
 #		if self.layers != []: self.mCanvas.setLayerSet( self.layers )
@@ -220,7 +221,6 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 #			self.vslValueTransparency.emit( SIGNAL( "valueChanged( int )" ), self.vslValueTransparency.value() )
 
 	def on_rbnRasterLayers_toggled( self, checked ):
-		print "Raster rbn toggled"
 		for i in range( len( self.mapLayers ) ):
 			if checked and ( self.mapLayers[i].type() != QgsMapLayer.VectorLayer ):
 				self.lvMapLayers.setRowHidden( i, False )
@@ -230,7 +230,6 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 				self.lvMapLayers.setRowHidden( i, True )
 
 	def on_rbnVectorLayers_toggled( self, checked ):
-		print "Vector rbn toggled"
 		for i in range( len( self.mapLayers ) ):
 			if checked and ( self.mapLayers[i].type() != QgsMapLayer.RasterLayer ):
 				self.lvMapLayers.setRowHidden( i, False )
@@ -258,4 +257,3 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			QMessageBox.information(self, self.tr("Information"), self.tr( msg ))
 		elif type == "critical":
 			QMessageBox.critical(self, self.tr("Error"), self.tr( msg ))
-
