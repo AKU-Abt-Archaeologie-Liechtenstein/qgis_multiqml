@@ -30,7 +30,6 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 #		self.mCanvas.setPalette( palette )
 #		self.mCanvas.setCanvasColor( Qt.white )
 #		layout.addWidget( self.mCanvas )
-#		print self.mCanvas.backgroundRole(  )
 		self.loadMapLayers()
 		self.readSettings()
 
