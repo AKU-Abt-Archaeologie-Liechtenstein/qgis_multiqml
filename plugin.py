@@ -8,7 +8,7 @@ from multiqml import MultiQmlDlg
 
 import resources
 
-class MultiQmlPlugin(QObject):
+class MultiQmlPlugin():
 	def __init__( self, iface ):
 		self.iface = iface
 
