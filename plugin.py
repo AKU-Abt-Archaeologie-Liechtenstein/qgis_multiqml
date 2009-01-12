@@ -1,5 +1,5 @@
 import sys
-#import pdb
+
 from PyQt4.QtCore import QObject, SIGNAL
 from PyQt4.QtGui import QMainWindow, QApplication, QAction, QIcon, \
 	QDialog, QLabel, QWidget, QVBoxLayout
@@ -26,6 +26,8 @@ class MultiQmlPlugin():
 		self.iface.addPluginToMenu( myTr.tr( "&MultiQml" ), self.actionRun )
 		self.iface.addPluginToMenu( myTr.tr( "&MultiQml" ), self.actionAbout )
 
+		self.isMultiQmlRun = False
+
 	def unload( self ):
 		myTr = QWidget()
 		self.iface.removePluginMenu( myTr.tr( "&MultiQml" ), self.actionRun )
@@ -33,9 +35,12 @@ class MultiQmlPlugin():
 		self.iface.removeToolBarIcon(self.actionRun)
 
 	def run( self ):
-		dlgMain = MultiQmlDlg( self.iface.mainWindow(  ) )
-#		MultiQmldlg = MultiQmlDlg( None )
-		dlgMain.show()
+		if not self.isMultiQmlRun:
+			self.isMultiQmlRun = True
+			dlgMain = MultiQmlDlg( self.iface.mainWindow() )
+			dlgMain.show()
+			dlgMain.exec_()
+			self.isMultiQmlRun = False
 
 	def about( self ):
 		myTr = QWidget()

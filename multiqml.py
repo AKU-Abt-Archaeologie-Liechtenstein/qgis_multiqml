@@ -1,9 +1,6 @@
-import sys
 import os
-import pdb
+import sys
 import tempfile
-
-#from osgeo import gdal
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -22,14 +19,10 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 		self.mapLayers = QgsMapLayerRegistry.instance().mapLayers().values()
 		self.fileNameStyle = QString()
 
-#		pdb.set_trace(  )
-#		layout = QHBoxLayout( self.canvasFrame )
-#		self.mCanvas = QgsMapCanvas( self.canvasFrame, "MultiQml Canvas" )
-#		palette = QPalette(  )
-#		palette.setColor( QPalette.Inactive, self.mCanvas.backgroundRole(  ), Qt.white )
-#		self.mCanvas.setPalette( palette )
-#		self.mCanvas.setCanvasColor( Qt.white )
-#		layout.addWidget( self.mCanvas )
+		QObject.connect( self.lvMapLayers, SIGNAL( "clicked( const QModelIndex & )" ), self.doApplyStyleButtonEnabled )
+		QObject.connect( self.rbnRasterLayers, SIGNAL( "toggled( bool )" ), self.doApplyStyleButtonEnabled )
+		QObject.connect( self.rbnVectorLayers, SIGNAL( "toggled( bool )" ), self.doApplyStyleButtonEnabled )
+
 		self.loadMapLayers()
 		self.readSettings()
 
@@ -73,7 +66,6 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 
 	@pyqtSignature( "" )
 	def on_pbnRestoreDefaultStyle_clicked(self):
-#		pdb.set_trace(  )
 		selected = self.lvMapLayers.selectedIndexes()
 		for i in selected:
 			layer = self.mapLayers[i.row()]
@@ -81,40 +73,11 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			if not isLoaded: self.myPluginMessage( "Unable to restory the initial style for layer \"%s\"\n\"%s\"." % ( layer.name(), myMessage ), "critical" )
 			layer.triggerRepaint()
 	
-#	@pyqtSignature( "" )
-#	def on_pbnLoadColormapFromBand_clicked(self):
-#		self.myPluginMessage( "A function not implement, yet.", "information" )
-#		myColorRampList = []
-#		selected = self.lvMapLayers.selectedIndexes()
-#		for i in selected:
-#			layer = QgsRasterLayer()
-#			layer = self.iface.mapCanvas().layer(i.row())
-#			myMessage = layer.readColorTable(1, myColorRampList)
-
 	@pyqtSignature( "" )
 	def on_pbnSelectAllLayers_clicked(self):
-#		if state == Qt.Checked:
-#			self.chbxViewLayers.setChecked( False )
 		self.lvMapLayers.selectAll()
-#		else:
-#			self.lvMapLayers.clearSelection()
-
-#	@pyqtSignature( "int" )
-#	def on_chbxViewLayers_stateChanged(self, state):
-#		if state == Qt.Checked:
-#			self.lvMapLayers.setSelectionMode(QAbstractItemView.SingleSelection)
-#			self.lvMapLayers.setCurrentIndex( self.lvMapLayers.model().index( 0 ) )
-#			self.lvMapLayers.emit( SIGNAL( "clicked(QModelIndex)" ), self.lvMapLayers.model().index( 0 ) )
-#	#		self.lvMapLayers.emit( SIGNAL( "activated(QModelIndex)" ), self.lvMapLayers.model().index( 0 ) )
-#		else:
-#			self.lvMapLayers.setSelectionMode(QAbstractItemView.MultiSelection)
-##			self.lvMapLayers.selectAll()
-#	def on_rbt
 
 	def loadMapLayers( self ):
-#		pdb.set_trace(  )
-#		self.countRasterPixelsList = []
-#		layers = []
 		layersNameList = QStringList()
 		for i in range( len( self.mapLayers ) ):
 			layersNameList.append( self.mapLayers[i].name() )
@@ -122,26 +85,12 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			myMessage, isSaved = self.mapLayers[i].saveNamedStyle(self.tmpQmlSrcList[i])
 			if not isSaved: self.myPluginMessage( "Unable to save the temp file of qml style \"%s\"\nThe function to\
 				\"Restore initial style\" will be unabled for layer \"%s\"\n\"%s\"." % ( self.tmpQmlSrcList[i], layersNameList[i], myMessage ), "critical" )
-		print "There are temp qml files:'", self.tmpQmlSrcList
-##			layers.append( QgsMapCanvasLayer( self.mapLayers[k] ) )
-#			print myMessage
-
-#			ds = gdal.Open( str( self.mapLayers[k].source() ) )
-#			colorTable = ds.GetRasterBand( 1 ).GetRasterColorTable()
-#			if colorTable:
-#				self.countRasterPixelsList.append( colorTable.GetCount() )
-#			else:
-#				self.countRasterPixelsList.append( 0 )
+		print "There are temp qml files:", self.tmpQmlSrcList
 
 		self.lvMapLayers.setModel( QStringListModel( layersNameList, self ) )
 		self.lvMapLayers.setSelectionMode(QAbstractItemView.MultiSelection)
 		self.lvMapLayers.setEditTriggers( QAbstractItemView.NoEditTriggers )
-		self.lvMapLayers.setCurrentIndex( self.lvMapLayers.model().index( 0 ) )
-#		self.lvMapLayers.selectAll()
-
-#		if self.layers != []: self.mCanvas.setLayerSet( self.layers )
-#		self.mCanvas.freeze( False )
-#		self.mCanvas.refresh(  )
+#		self.lvMapLayers.setCurrentIndex( self.lvMapLayers.model().index( 0 ) )
 		
 	@pyqtSignature( "" )
 	def on_pbnClose_clicked(self):
@@ -152,72 +101,16 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 		for i in range( len( self.mapLayers ) ):
 			os.remove( self.tmpQmlSrcList[i] )
 			print "The temp qml file:", self.tmpQmlSrcList[i], "removed"
-#			src = unicode( self.mapLayers[i].source() )
-#			layerQmlSrc = os.path.splitext( src )[0] + '.qml'
-#			if os.path.exists( layerQmlSrc ):
-#				os.remove(layerQmlSrc)
-#
-#			if os.path.exists( layerQmlSrc + ".old" ):
-#				os.rename( layerQmlSrc + ".old", layerQmlSrc )
 		event.accept()
 
-#	@pyqtSignature( "QModelIndex" )
-	def on_lvMapLayers_clicked( self, index ):
-#	def on_lvMapLayers_activated( self, index ):
+#	@pyqtSignature( "const QModelIndex&" )
+#	def on_lvMapLayers_clicked( self, index ):
+	def doApplyStyleButtonEnabled( self ):
 		if len( self.lvMapLayers.selectedIndexes() ) == 0:
 			self.pbnApplyStyle.setEnabled( False )
 		else:
 			self.pbnApplyStyle.setEnabled( True )
-#		if self.chbxViewLayers.checkState() == Qt.Checked:
-#			layer = self.mCanvas.layer( index.row() )
-#			print layer
-#			if layer:
-#				print self.countRasterPixelsList
-#				rasterPixelsList = QStringList()
-#				if self.countRasterPixelsList == []:
-#					self.lvTransparentClasses.model().removeRows( 0, self.lvTransparentClasses.model().rowCount() )
-#				else:
-#					for i in range( self.countRasterPixelsList[index.row()] ):
-#						rasterPixelsList.append( str( i ) )
-#					self.lvTransparentClasses.setModel( QStringListModel( rasterPixelsList, self ) )
-#					self.lvTransparentClasses.setEditTriggers( QAbstractItemView.NoEditTriggers )
-
-#				self.mCanvas.clear()
-#				self.mCanvas.setCurrentLayer( layer )
-#				self.mCanvas.setExtent( layer.extent() )
-##				self.mCanvas.refresh()
-#				layer.triggerRepaint()
-
-#	@pyqtSignature( "QModelIndex" )
-#	def on_lvTransparentClasses_clicked( self, index ):
-##	def on_lvTransparentClasses_activated( self, index ):
-#		if self.chbxViewLayers.checkState() == Qt.Checked:
-#			currentLayer = self.mCanvas.currentLayer()
-#			if currentLayer:
-#				myTransparentSingleValuePixelList = currentLayer.rasterTransparency().transparentSingleValuePixelList()
-#				for transparentPixel in myTransparentSingleValuePixelList:
-#					if transparentPixel.pixelValue == index.row():
-#						myTransparentSingleValuePixelList[myTransparentSingleValuePixelList.index( transparentPixel )].percentTransparent = \
-#							( self.vslValueTransparency.value() / 255 ) * 100
-#				else:
-#					myTransparentPixel = QgsRasterTransparency.TransparentSingleValuePixel()
-#					myTransparentPixel.pixelValue = index.row()
-#					myTransparentPixel.percentTransparent = ( self.vslValueTransparency.value() / 255 ) * 100
-#					myTransparentSingleValuePixelList.append( myTransparentPixel )
-#
-#				currentLayer.rasterTransparency().setTransparentSingleValuePixelList( myTransparentSingleValuePixelList )
-#				self.mCanvas.refresh()
-#				currentLayer.triggerRepaint()
-
-#	def on_vslValueTransparency_valueChanged( self, val ):
-#		self.lbTransparencyValuePercant.setText( self.tr( "%1%" ).arg( int( ( val / 255.0 ) * 100 ) ) )
-#		if self.chbxTransparentLayer.checkState() == Qt.Checked:
-#			self.mCanvas.currentLayer().setTransparency( 255 - val )
-#			self.mCanvas.currentLayer().triggerRepaint()
-
-#	def on_chbxTransparentLayer_stateChanged( self, state ):
-#		if state == Qt.Checked:
-#			self.vslValueTransparency.emit( SIGNAL( "valueChanged( int )" ), self.vslValueTransparency.value() )
+#			self.lvMapLayers.setCurrentIndex( self.lvMapLayers.model().index( 0 ) )
 
 	def on_rbnRasterLayers_toggled( self, checked ):
 		for i in range( len( self.mapLayers ) ):
