@@ -5,7 +5,7 @@ def description():
 def qgisMinimumVersion(): 
 	return "1.0" 
 def version():
-	return "Version 0.2.0"
+	return "Version 0.2.1"
 def classFactory( iface ):
 	from plugin import MultiQmlPlugin
 	return MultiQmlPlugin( iface )

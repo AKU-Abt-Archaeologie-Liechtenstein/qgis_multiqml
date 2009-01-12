@@ -46,13 +46,13 @@ class MultiQmlPlugin():
 		myTr = QWidget()
 		dlgAbout = QDialog( self.iface.mainWindow() )
 		lines = QVBoxLayout( dlgAbout )
-		lines.addWidget( QLabel( myTr.tr( "<p><b>MultiQml:</b></p>\
-		<pre>  Apply single qml to multiple raster and vector layers.</pre>\
-		<p><b>Developers:</b></p>\
-		<pre>  Lynx (lynx21.12.12@gmail.com)</pre>\
-		<pre>  Maxim Dubinin (sim@gis-lab.info)</pre>\
-		<p><b>Link:</b></p>") ) )
-		link = QLabel( "<pre>  <a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a></pre>" )
+		lines.addWidget( QLabel( myTr.tr( "<b>MultiQml:</b>" ) ) )
+		lines.addWidget( QLabel( myTr.tr( "    Apply single qml to multiple raster and vector layers." ) ) )
+		lines.addWidget( QLabel( myTr.tr( "<b>Developers:</b>" ) ) )
+		lines.addWidget( QLabel( myTr.tr( "    Lynx (lynx21.12.12@gmail.com)" ) ) )
+		lines.addWidget( QLabel( myTr.tr( "    Maxim Dubinin (sim@gis-lab.info)" ) ) )
+		lines.addWidget( QLabel( myTr.tr( "<b>Link:</b>") ) )
+		link = QLabel( "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>" )
 		link.setOpenExternalLinks( True )
 		lines.addWidget( link )
 
