@@ -42,12 +42,12 @@ class MultiQmlPlugin(QObject):
 		dlgAbout = QDialog( self.iface.mainWindow() )
 		lines = QVBoxLayout( dlgAbout )
 		lines.addWidget( QLabel( myTr.tr( "<p><b>MultiQml:</b></p>\
-		<p>\tApply single qml to multiple raster and vector layers.</p>\
+		<pre>  Apply single qml to multiple raster and vector layers.</pre>\
 		<p><b>Developers:</b></p>\
-		<p>   Lynx (lynx21.12.12@gmail.com)</p>\
-		<p>Maxim Dubinin (sim@gis-lab.info)</p>\
+		<pre>  Lynx (lynx21.12.12@gmail.com)</pre>\
+		<pre>  Maxim Dubinin (sim@gis-lab.info)</pre>\
 		<p><b>Link:</b></p>") ) )
-		link = QLabel( "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>" )
+		link = QLabel( "<pre>  <a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a></pre>" )
 		link.setOpenExternalLinks( True )
 		lines.addWidget( link )
 
