@@ -33,7 +33,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			line = qmlFile.readline()
 			result = False
 			while line != "":
-				if line.find( "<rasterproperties>" ) != -1:
+				if "<rasterproperties>" in line:
 					result = True
 					break
 				line = qmlFile.readline()
