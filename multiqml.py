@@ -1,6 +1,7 @@
 import os
 import sys
 import tempfile
+import gettext
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -41,36 +42,41 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			return result
 
 		myLastUsedDir = self.settings.value( "multiqmlplugin/lastStyleDir" ).toString()
-		self.fileNameStyle = QFileDialog.getOpenFileName(self, self.tr("Open style"), myLastUsedDir, self.tr("QGIS Apply Style File (*.qml)"))
+		self.fileNameStyle = QFileDialog.getOpenFileName(self, QApplication.translate("MultiQmlDlg", "Open style"), myLastUsedDir, QApplication.translate("MultiQmlDlg", "QGIS apply style file (*.qml)"))
 
 		if not self.fileNameStyle.isEmpty():
 			selected = self.lvMapLayers.selectedIndexes()
-			print "There are slected layers:", selected
+#			print "There are slected layers:", selected
 			for i in selected:
 				layer = self.mapLayers[i.row()]
 				
 				if ( layer.type() == QgsMapLayer.VectorLayer ) and isRasterQml():
-					self.myPluginMessage( "Unable to apply raster qml \"%s\" to vector layer \"%s\"." % ( self.fileNameStyle,  layer.name()), "critical" )
+					self.myPluginMessage( QApplication.translate("MultiQmlDlg", "Unable to apply raster qml style \"%1\" to vector layer \"%2\".")\
+						.arg(self.fileNameStyle).arg(layer.name()), "critical" )
 					continue
 				elif ( layer.type() == QgsMapLayer.RasterLayer ) and not isRasterQml():
-					self.myPluginMessage( "Unable to apply vector qml \"%s\" to raster layer \"%s\"." % ( self.fileNameStyle,  layer.name()), "critical" )
+					self.myPluginMessage( QApplication.translate("MultiQmlDlg", "Unable to apply vector qml style \"%1\" to raster layer \"%2\".")\
+						.arg(self.fileNameStyle).arg(layer.name()), "critical" )
 					continue
 
-				myMessage, isLoaded = layer.loadNamedStyle(self.fileNameStyle)
-				if not isLoaded: self.myPluginMessage( "Unable to apply qml style: %s to raster: %s\n%s." % ( self.fileNameStyle, layer.name(), myMessage ), "critical" )
+				message, isLoaded = layer.loadNamedStyle(self.fileNameStyle)
+				if not isLoaded: 
+					self.myPluginMessage( QApplication.translate("MultiQmlDlg", "Unable to apply qml style \"%1\" to layer \"%2\"\n%3.")\
+						.arg(self.fileNameStyle).arg(layer.name()).arg(message), "critical" )
 
 				layer.triggerRepaint()
 			self.settings.setValue( "multiqmlplugin/lastStyleDir", QVariant( os.path.dirname( unicode( self.fileNameStyle ) ) ) )
 		else:
-			self.myPluginMessage( "A style was not applied.", "information" )
+			self.myPluginMessage( QApplication.translate("MultiQmlDlg", "A style was not applied." ), "information" )
 
 	@pyqtSignature( "" )
 	def on_pbnRestoreDefaultStyle_clicked(self):
 		selected = self.lvMapLayers.selectedIndexes()
 		for i in selected:
 			layer = self.mapLayers[i.row()]
-			myMessage, isLoaded = layer.loadNamedStyle(self.tmpQmlSrcList[i.row()])
-			if not isLoaded: self.myPluginMessage( "Unable to restory the initial style for layer \"%s\"\n\"%s\"." % ( layer.name(), myMessage ), "critical" )
+			message, isLoaded = layer.loadNamedStyle(self.tmpQmlSrcList[i.row()])
+			if not isLoaded: self.myPluginMessage( QApplication.translate("MultiQmlDlg",  "Unable to restory an initial style for layer \"%1\"\n%2.")\
+				.arg(layer.name()).arg(message), "critical" )
 			layer.triggerRepaint()
 	
 	@pyqtSignature( "" )
@@ -82,15 +88,19 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 		for i in range( len( self.mapLayers ) ):
 			layersNameList.append( self.mapLayers[i].name() )
 			self.tmpQmlSrcList.append( tempfile.mktemp( '.qml' ) )
-			myMessage, isSaved = self.mapLayers[i].saveNamedStyle(self.tmpQmlSrcList[i])
-			if not isSaved: self.myPluginMessage( "Unable to save the temp file of qml style \"%s\"\nThe function to\
-				\"Restore initial style\" will be unabled for layer \"%s\"\n\"%s\"." % ( self.tmpQmlSrcList[i], layersNameList[i], myMessage ), "critical" )
-		print "There are temp qml files:", self.tmpQmlSrcList
+			message, isSaved = self.mapLayers[i].saveNamedStyle(self.tmpQmlSrcList[i])
+#			fmtDic = {'fileNameStyle' : self.tmpQmlSrcList[i], 'layerName' : layersNameList[i], 'message' : message}
+#			if not isSaved: self.myPluginMessage( QApplication.translate("MultiQmlDlg", "Unable to save the temp file of qml style \"%(fileNameStyle)s\"\nThe function "
+#				"\"Restore initial style\" will be unabled for layer \"%(layerName)s\"\n\"%(message)s\"." % fmtDic ), "critical" )
+
+#		print "There are temp qml files:", self.tmpQmlSrcList
 
 		self.lvMapLayers.setModel( QStringListModel( layersNameList, self ) )
 		self.lvMapLayers.setSelectionMode(QAbstractItemView.MultiSelection)
 		self.lvMapLayers.setEditTriggers( QAbstractItemView.NoEditTriggers )
-#		self.lvMapLayers.setCurrentIndex( self.lvMapLayers.model().index( 0 ) )
+
+		if self.lvMapLayers.model().rowCount() == 0:
+			self.pbnSelectAllLayers.setEnabled( False )
 		
 	@pyqtSignature( "" )
 	def on_pbnClose_clicked(self):
@@ -100,7 +110,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 	def closeEvent( self, event ):
 		for i in range( len( self.mapLayers ) ):
 			os.remove( self.tmpQmlSrcList[i] )
-			print "The temp qml file:", self.tmpQmlSrcList[i], "removed"
+#			print "The temp qml file:", self.tmpQmlSrcList[i], "removed"
 		event.accept()
 
 #	@pyqtSignature( "const QModelIndex&" )
@@ -146,6 +156,6 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 
 	def myPluginMessage( self, msg, type ):
 		if type == "information":
-			QMessageBox.information(self, self.tr("Information"), self.tr( msg ))
+			QMessageBox.information(self, QApplication.translate("MultiQmlDlg", "Information"), msg )
 		elif type == "critical":
-			QMessageBox.critical(self, self.tr("Error"), self.tr( msg ))
+			QMessageBox.critical(self, QApplication.translate("MultiQmlDlg", "Error"), msg )

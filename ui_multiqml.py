@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'multiqml.ui'
 #
-# Created: Sat Jan 10 18:08:02 2009
+# Created: Sat Jan 17 16:21:03 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -75,7 +75,7 @@ class Ui_MultiQmlForm(object):
 
     def retranslateUi(self, MultiQmlForm):
         MultiQmlForm.setWindowTitle(QtGui.QApplication.translate("MultiQmlForm", "Assign style", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("MultiQmlForm", "Map layers:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("MultiQmlForm", "Layers:", None, QtGui.QApplication.UnicodeUTF8))
         self.rbnRasterLayers.setText(QtGui.QApplication.translate("MultiQmlForm", "Raster", None, QtGui.QApplication.UnicodeUTF8))
         self.rbnVectorLayers.setText(QtGui.QApplication.translate("MultiQmlForm", "Vector", None, QtGui.QApplication.UnicodeUTF8))
         self.pbnApplyStyle.setText(QtGui.QApplication.translate("MultiQmlForm", "Apply style ...", None, QtGui.QApplication.UnicodeUTF8))

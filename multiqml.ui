@@ -18,6 +18,9 @@
   <property name="windowTitle" >
    <string>Assign style</string>
   </property>
+  <property name="locale" >
+   <locale country="UnitedStates" language="English" />
+  </property>
   <property name="sizeGripEnabled" >
    <bool>false</bool>
   </property>
@@ -34,7 +37,7 @@
       </sizepolicy>
      </property>
      <property name="text" >
-      <string>Map layers:</string>
+      <string>Layers:</string>
      </property>
      <property name="buddy" >
       <cstring>lvMapLayers</cstring>
