@@ -16,7 +16,7 @@ def description():
 def qgisMinimumVersion():
 	return "1.0"
 def version():
-	return unicode(QApplication.translate("__init__", "Version") + " 0.2.3")
+	return unicode(QApplication.translate("__init__", "Version") " 0.2.3")
 def classFactory( iface ):
 	from plugin import MultiQmlPlugin
 	return MultiQmlPlugin( iface )
