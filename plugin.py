@@ -37,8 +37,7 @@ class MultiQmlPlugin():
 #		t = gettext.translation('tr_multiqml', '.')
 #		self._ = t.ugettext
 
-#		self.actionRun = QAction( QIcon( ":/plugins/multiqml/icon.png" ),\
-		self.actionRun = QAction( QIcon( ":/icon.png" ),\
+		self.actionRun = QAction( QIcon( ":/plugins/multiqml/icon.png" ),\
 			QApplication.translate("MultiQmlPlugin", "MultiQml" ), self.iface.mainWindow() )
 		self.actionRun.setWhatsThis( QApplication.translate("MultiQmlPlugin", "Apply single qml style to multiple raster or vector layers.") )
 		self.actionAbout = QAction( QApplication.translate("MultiQmlPlugin", "About" ), self.iface.mainWindow() )

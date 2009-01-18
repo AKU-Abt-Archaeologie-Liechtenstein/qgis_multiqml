@@ -6,7 +6,7 @@ import resources
 if QLocale.system().name() == "ru_RU":
 #	i18n Russian
 	translatorDlg = QTranslator()
-	translatorDlg.load(":/translations/multiqml_ru")
+	translatorDlg.load(":/plugins/multiqml/translations/multiqml_ru")
 	QApplication.installTranslator(translatorDlg)
 	
 def name():
