@@ -46,7 +46,6 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 
 		if not self.fileNameStyle.isEmpty():
 			selected = self.lvMapLayers.selectedIndexes()
-#			print "There are slected layers:", selected
 			for i in selected:
 				layer = self.mapLayers[i.row()]
 				
@@ -89,11 +88,6 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			layersNameList.append( self.mapLayers[i].name() )
 			self.tmpQmlSrcList.append( tempfile.mktemp( '.qml' ) )
 			message, isSaved = self.mapLayers[i].saveNamedStyle(self.tmpQmlSrcList[i])
-#			fmtDic = {'fileNameStyle' : self.tmpQmlSrcList[i], 'layerName' : layersNameList[i], 'message' : message}
-#			if not isSaved: self.myPluginMessage( QApplication.translate("MultiQmlDlg", "Unable to save the temp file of qml style \"%(fileNameStyle)s\"\nThe function "
-#				"\"Restore initial style\" will be unabled for layer \"%(layerName)s\"\n\"%(message)s\"." % fmtDic ), "critical" )
-
-#		print "There are temp qml files:", self.tmpQmlSrcList
 
 		self.lvMapLayers.setModel( QStringListModel( layersNameList, self ) )
 		self.lvMapLayers.setSelectionMode(QAbstractItemView.MultiSelection)
@@ -110,17 +104,13 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 	def closeEvent( self, event ):
 		for i in range( len( self.mapLayers ) ):
 			os.remove( self.tmpQmlSrcList[i] )
-#			print "The temp qml file:", self.tmpQmlSrcList[i], "removed"
 		event.accept()
 
-#	@pyqtSignature( "const QModelIndex&" )
-#	def on_lvMapLayers_clicked( self, index ):
 	def doApplyStyleButtonEnabled( self ):
 		if len( self.lvMapLayers.selectedIndexes() ) == 0:
 			self.pbnApplyStyle.setEnabled( False )
 		else:
 			self.pbnApplyStyle.setEnabled( True )
-#			self.lvMapLayers.setCurrentIndex( self.lvMapLayers.model().index( 0 ) )
 
 	def on_rbnRasterLayers_toggled( self, checked ):
 		for i in range( len( self.mapLayers ) ):
