@@ -13,10 +13,10 @@ def name():
 	return unicode(QApplication.translate("__init__", "MultiQml"))
 def description():
 	return unicode(QApplication.translate("__init__", "Apply single qml style to multiple raster or vector layers."))
-def qgisMinimumVersion(): 
-	return "1.0" 
+def qgisMinimumVersion():
+	return "1.0"
 def version():
-	return unicode(QApplication.translate("__init__", "Version")) + " 0.2.3"
+	return unicode(QApplication.translate("__init__", "Version") + " 0.2.3")
 def classFactory( iface ):
 	from plugin import MultiQmlPlugin
 	return MultiQmlPlugin( iface )
