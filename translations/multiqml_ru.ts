@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="ru_RU">
-<defaultcodec></defaultcodec>
 <context>
     <name>MultiQmlDlg</name>
     <message>
@@ -14,40 +13,40 @@
         <translation>QGIS применить стиль (*.qml)</translation>
     </message>
     <message>
-        <location filename="multiqml.py" line="55"/>
+        <location filename="multiqml.py" line="54"/>
         <source>Unable to apply raster qml style &quot;%1&quot; to vector layer &quot;%2&quot;.</source>
         <translation>Невозможно применить растровый qml стиль &quot;%1&quot; к векторному слою &quot;%2&quot;.</translation>
     </message>
     <message>
-        <location filename="multiqml.py" line="59"/>
+        <location filename="multiqml.py" line="58"/>
         <source>Unable to apply vector qml style &quot;%1&quot; to raster layer &quot;%2&quot;.</source>
         <translation>Невозможно применить векторный qml стиль &quot;%1&quot; к растровому слою &quot;%2&quot;.</translation>
     </message>
     <message>
-        <location filename="multiqml.py" line="65"/>
+        <location filename="multiqml.py" line="64"/>
         <source>Unable to apply qml style &quot;%1&quot; to layer &quot;%2&quot;
 %3.</source>
         <translation>Невозможно применить qml стиль &quot;%1&quot; к слою &quot;%2&quot;
 %3.</translation>
     </message>
     <message>
-        <location filename="multiqml.py" line="70"/>
+        <location filename="multiqml.py" line="69"/>
         <source>A style was not applied.</source>
         <translation>Стиль не был применен.</translation>
     </message>
     <message>
-        <location filename="multiqml.py" line="79"/>
+        <location filename="multiqml.py" line="78"/>
         <source>Unable to restory an initial style for layer &quot;%1&quot;
 %2.</source>
         <translation>Невозможно восстановить начальный стиль для слоя &quot;%1&quot;%2.</translation>
     </message>
     <message>
-        <location filename="multiqml.py" line="159"/>
+        <location filename="multiqml.py" line="149"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="multiqml.py" line="161"/>
+        <location filename="multiqml.py" line="151"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
@@ -118,9 +117,9 @@
         <translation>&amp;Мульти Qml</translation>
     </message>
     <message>
-        <location filename="plugin.py" line="72"/>
+        <location filename="plugin.py" line="71"/>
         <source>&lt;b&gt;MultiQml:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Мульти Qml&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Мульти Qml:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="plugin.py" line="71"/>
@@ -150,21 +149,36 @@
         <comment>Window title</comment>
         <translation>Информация</translation>
     </message>
+    <message>
+        <location filename="plugin.py" line="78"/>
+        <source>&lt;a href=&quot;http://gis-lab.info/qa/qgis-multiqml-eng.html&quot;&gt;http://gis-lab.info/qa/qgis-multiqml-eng.html&lt;/a&gt;</source>
+        <translation>&lt;a href=&quot;http://gis-lab.info/qa/qgis-multiqml.html&quot;&gt;http://gis-lab.info/qa/qgis-multiqml.html&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="plugin.py" line="73"/>
+        <source>&lt;b&gt;Developedsfdsrs:&lt;/b&gt;</source>
+        <translation type="obsolete">sdfd</translation>
+    </message>
+    <message>
+        <location filename="plugin.py" line="72"/>
+        <source>&lt;b&gt;MultiQml (Version %1):&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Мульти Qml (Версия %1):&lt;/b&gt;</translation>
+    </message>
 </context>
 <context>
     <name>__init__</name>
     <message>
-        <location filename="__init__.py" line="13"/>
+        <location filename="__init__.py" line="14"/>
         <source>MultiQml</source>
         <translation>Мульти Qml</translation>
     </message>
     <message>
-        <location filename="__init__.py" line="15"/>
+        <location filename="__init__.py" line="16"/>
         <source>Apply single qml style to multiple raster or vector layers.</source>
         <translation>Применить один qml стиль к нескольким растровым или векторным слоям.</translation>
     </message>
     <message>
-        <location filename="__init__.py" line="19"/>
+        <location filename="__init__.py" line="20"/>
         <source>Version</source>
         <translation>Версия</translation>
     </message>

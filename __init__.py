@@ -9,6 +9,7 @@ if QLocale.system().name() == "ru_RU":
 	translatorDlg.load(":/plugins/multiqml/translations/multiqml_ru")
 	QApplication.installTranslator(translatorDlg)
 	
+mVersion = " 0.2.5"
 def name():
 	return unicode(QApplication.translate("__init__", "MultiQml"))
 def description():
@@ -16,7 +17,7 @@ def description():
 def qgisMinimumVersion():
 	return "1.0"
 def version():
-	return unicode(QApplication.translate("__init__", "Version")) + unicode(" 0.2.4")
+	return unicode(QApplication.translate("__init__", "Version")) + mVersion # unicode(" 0.2.5")
 def classFactory( iface ):
 	from plugin import MultiQmlPlugin
 	return MultiQmlPlugin( iface )

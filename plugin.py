@@ -25,6 +25,7 @@ from PyQt4.QtGui import QMainWindow, QApplication, QAction, QIcon, \
 	QDialog, QLabel, QWidget, QVBoxLayout
 
 from multiqml import MultiQmlDlg
+from __init__ import mVersion
 
 import resources
 
@@ -66,15 +67,15 @@ class MultiQmlPlugin():
 
 	def about( self ):
 		dlgAbout = QDialog( self.iface.mainWindow() )
-		dlgAbout.setWindowTitle( QApplication.translate("MultiQmlPlugin", "About", "Window title"))
+		dlgAbout.setWindowTitle( QApplication.translate("MultiQmlPlugin", "About", "Window title") )
 		lines = QVBoxLayout( dlgAbout )
-		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>MultiQml:</b>" ) ) )
+		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %1):</b>" ).arg(mVersion) ) )
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "    The QGIS plugin for apply single qml style\n    to multiple raster or vector layers." ) ) )
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Developers:</b>" ) ) )
 		lines.addWidget( QLabel( "    Lynx (lynx21.12.12@gmail.com)" ) )
 		lines.addWidget( QLabel( "    Maxim Dubinin (sim@gis-lab.info)" ) )
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Link:</b>") ) )
-		link = QLabel( "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>" )
+		link = QLabel( QApplication.translate("MultiQmlPlugin", "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>" ) )
 		link.setOpenExternalLinks( True )
 		lines.addWidget( link )
 

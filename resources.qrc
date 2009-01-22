@@ -1,7 +1,7 @@
-<RCC> 
+<RCC>
   <qresource prefix="/plugins/multiqml">
-    <file>icon.png</file> 
-	<file>translations/multiqml_ru.qm</file>
+    <file>icon.png</file>
+    <file>translations/multiqml_ru.qm</file>
   </qresource>
-</RCC> 
+</RCC>
 
