@@ -17,7 +17,7 @@ def description():
 def qgisMinimumVersion():
 	return "1.0"
 def version():
-	return mVersion # unicode(QApplication.translate("__init__", "Version")) + mVersion # unicode(" 0.2.5")
+	return mVersion
 def authorName():
 	return "Gis-Lab"
 def homepage():
