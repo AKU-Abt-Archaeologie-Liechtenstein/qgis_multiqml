@@ -9,15 +9,19 @@ if QLocale.system().name() == "ru_RU":
 	translatorDlg.load(":/plugins/multiqml/translations/multiqml_ru")
 	QApplication.installTranslator(translatorDlg)
 	
-mVersion = " 0.2.6"
+mVersion = "0.2.6"
 def name():
 	return unicode(QApplication.translate("__init__", "MultiQml"))
 def description():
-	return unicode(QApplication.translate("__init__", "Apply single qml style to multiple raster or vector layers."))
+	return unicode(QApplication.translate("__init__", "Apply single qml style to multiple raster or vector layers"))
 def qgisMinimumVersion():
 	return "1.0"
 def version():
-	return unicode(QApplication.translate("__init__", "Version")) + mVersion # unicode(" 0.2.5")
+	return mVersion # unicode(QApplication.translate("__init__", "Version")) + mVersion # unicode(" 0.2.5")
+def authorName():
+	return "Gis-Lab"
+def homepage():
+	return QApplication.translate("<homepage>http://gis-lab.info/qa/multiqml.html</homepage>")
 def classFactory( iface ):
 	from plugin import MultiQmlPlugin
 	return MultiQmlPlugin( iface )

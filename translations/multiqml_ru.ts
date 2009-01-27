@@ -97,22 +97,22 @@
 <context>
     <name>MultiQmlPlugin</name>
     <message>
-        <location filename="plugin.py" line="42"/>
+        <location filename="plugin.py" line="37"/>
         <source>MultiQml</source>
         <translation>Мульти Qml</translation>
     </message>
     <message>
         <location filename="plugin.py" line="43"/>
         <source>Apply single qml style to multiple raster or vector layers.</source>
-        <translation>Применить один qml стиль к нескольким растровым или векторным слоям.</translation>
+        <translation type="obsolete">Применить один qml стиль к нескольким растровым или векторным слоям.</translation>
     </message>
     <message>
-        <location filename="plugin.py" line="44"/>
+        <location filename="plugin.py" line="39"/>
         <source>About</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="plugin.py" line="57"/>
+        <location filename="plugin.py" line="52"/>
         <source>&amp;MultiQml</source>
         <translation>&amp;Мульти Qml</translation>
     </message>
@@ -127,30 +127,30 @@
         <translation type="obsolete">    Плагин QGIS для применения одного qml стиля к нескольким растровым или векторным слоям.</translation>
     </message>
     <message>
-        <location filename="plugin.py" line="74"/>
+        <location filename="plugin.py" line="69"/>
         <source>&lt;b&gt;Developers:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Разработчики:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="plugin.py" line="77"/>
+        <location filename="plugin.py" line="72"/>
         <source>&lt;b&gt;Link:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Ссылка:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="plugin.py" line="73"/>
+        <location filename="plugin.py" line="68"/>
         <source>    The QGIS plugin for apply single qml style
     to multiple raster or vector layers.</source>
         <translation>    Плагин QGIS для применения одного qml стиля
     к нескольким растровым или векторным слоям.</translation>
     </message>
     <message>
-        <location filename="plugin.py" line="70"/>
+        <location filename="plugin.py" line="65"/>
         <source>About</source>
         <comment>Window title</comment>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="plugin.py" line="78"/>
+        <location filename="plugin.py" line="74"/>
         <source>&lt;a href=&quot;http://gis-lab.info/qa/qgis-multiqml-eng.html&quot;&gt;http://gis-lab.info/qa/qgis-multiqml-eng.html&lt;/a&gt;</source>
         <translation>&lt;a href=&quot;http://gis-lab.info/qa/qgis-multiqml.html&quot;&gt;http://gis-lab.info/qa/qgis-multiqml.html&lt;/a&gt;</translation>
     </message>
@@ -160,9 +160,14 @@
         <translation type="obsolete">sdfd</translation>
     </message>
     <message>
-        <location filename="plugin.py" line="72"/>
+        <location filename="plugin.py" line="67"/>
         <source>&lt;b&gt;MultiQml (Version %1):&lt;/b&gt;</source>
         <translation>&lt;b&gt;Мульти Qml (Версия %1):&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="plugin.py" line="38"/>
+        <source>Apply single qml style to multiple raster or vector layers</source>
+        <translation>Применить один qml стиль к нескольким растровым или векторным слоям</translation>
     </message>
 </context>
 <context>
@@ -175,12 +180,17 @@
     <message>
         <location filename="__init__.py" line="16"/>
         <source>Apply single qml style to multiple raster or vector layers.</source>
-        <translation>Применить один qml стиль к нескольким растровым или векторным слоям.</translation>
+        <translation type="obsolete">Применить один qml стиль к нескольким растровым или векторным слоям.</translation>
     </message>
     <message>
         <location filename="__init__.py" line="20"/>
         <source>Version</source>
-        <translation>Версия</translation>
+        <translation type="obsolete">Версия</translation>
+    </message>
+    <message>
+        <location filename="__init__.py" line="16"/>
+        <source>Apply single qml style to multiple raster or vector layers</source>
+        <translation>Применить один qml стиль к нескольким растровым или векторным слоям</translation>
     </message>
 </context>
 </TS>

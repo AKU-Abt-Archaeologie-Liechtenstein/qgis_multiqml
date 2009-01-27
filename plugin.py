@@ -4,8 +4,7 @@
 		 				or vector layers
                              -------------------
     begin                : 2008-12-25
-    copyright            : (C) 2008 by Lynx
-    email                : lynx21.12.12@gmail.com
+    copyright            : (C) 2008 by Lynx, Maxim Dubinin
  ***************************************************************************/
 
 /***************************************************************************
@@ -34,13 +33,9 @@ class MultiQmlPlugin():
 		self.iface = iface
 
 	def initGui( self ):
-		# Localization
-#		t = gettext.translation('tr_multiqml', '.')
-#		self._ = t.ugettext
-
 		self.actionRun = QAction( QIcon( ":/plugins/multiqml/icon.png" ),\
 			QApplication.translate("MultiQmlPlugin", "MultiQml" ), self.iface.mainWindow() )
-		self.actionRun.setWhatsThis( QApplication.translate("MultiQmlPlugin", "Apply single qml style to multiple raster or vector layers.") )
+		self.actionRun.setWhatsThis( QApplication.translate("MultiQmlPlugin", "Apply single qml style to multiple raster or vector layers") )
 		self.actionAbout = QAction( QApplication.translate("MultiQmlPlugin", "About" ), self.iface.mainWindow() )
 
 		QObject.connect( self.actionRun, SIGNAL( "activated()" ), self.run )
@@ -72,12 +67,13 @@ class MultiQmlPlugin():
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %1):</b>" ).arg(mVersion) ) )
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "    The QGIS plugin for apply single qml style\n    to multiple raster or vector layers." ) ) )
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Developers:</b>" ) ) )
-		lines.addWidget( QLabel( "    Lynx (lynx21.12.12@gmail.com)" ) )
+		lines.addWidget( QLabel( "    Lynx (alex-86p@yandex.ru" ) )
 		lines.addWidget( QLabel( "    Maxim Dubinin (sim@gis-lab.info)" ) )
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Link:</b>") ) )
+#		lines.addWidget( QLabel( "<homepage>http://gis-lab.info/qa/qgis-multiqml-eng.html</homepage>" ) )
 		link = QLabel( QApplication.translate("MultiQmlPlugin", "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>" ) )
-		link.setOpenExternalLinks( True )
-		lines.addWidget( link )
+ 		link.setOpenExternalLinks( True )
+ 		lines.addWidget( link )
 
 		dlgAbout.exec_()
 
