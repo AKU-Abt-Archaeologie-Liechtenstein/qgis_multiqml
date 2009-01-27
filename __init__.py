@@ -21,7 +21,7 @@ def version():
 def authorName():
 	return "Gis-Lab"
 def homepage():
-	return QApplication.translate("<homepage>http://gis-lab.info/qa/multiqml.html</homepage>")
+	return QApplication.translate("<homepage>http://gis-lab.info/qa/qgis-multiqml.html</homepage>")
 def classFactory( iface ):
 	from plugin import MultiQmlPlugin
 	return MultiQmlPlugin( iface )

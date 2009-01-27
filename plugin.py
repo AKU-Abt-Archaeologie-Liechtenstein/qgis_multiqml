@@ -67,7 +67,7 @@ class MultiQmlPlugin():
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %1):</b>" ).arg(mVersion) ) )
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "    The QGIS plugin for apply single qml style\n    to multiple raster or vector layers." ) ) )
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Developers:</b>" ) ) )
-		lines.addWidget( QLabel( "    Lynx (alex-86p@yandex.ru" ) )
+		lines.addWidget( QLabel( "    Lynx (alex-86p@yandex.ru)" ) )
 		lines.addWidget( QLabel( "    Maxim Dubinin (sim@gis-lab.info)" ) )
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Link:</b>") ) )
 #		lines.addWidget( QLabel( "<homepage>http://gis-lab.info/qa/qgis-multiqml-eng.html</homepage>" ) )
