@@ -192,5 +192,10 @@
         <source>Apply single qml style to multiple raster or vector layers</source>
         <translation>Применить один qml стиль к нескольким растровым или векторным слоям</translation>
     </message>
+    <message>
+        <location filename="__init__.py" line="25"/>
+        <source>http://gis-lab.info/qa/qgis-multiqml-eng.html</source>
+        <translation>http://gis-lab.info/qa/qgis-multiqml.html</translation>
+    </message>
 </context>
 </TS>
