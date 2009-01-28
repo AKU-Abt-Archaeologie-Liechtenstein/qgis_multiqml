@@ -1,15 +1,16 @@
-from PyQt4.QtCore import QTranslator, QLocale
+from PyQt4.QtCore import QTranslator, QSettings
 from PyQt4.QtGui import QApplication
 
 import resources
 
-if QLocale.system().name() == "ru_RU":
+settings = QSettings()
+if settings.value("locale/userLocale").toString() == "ru_RU":
 #	i18n Russian
 	translatorDlg = QTranslator()
 	translatorDlg.load(":/plugins/multiqml/translations/multiqml_ru")
 	QApplication.installTranslator(translatorDlg)
 	
-mVersion = "0.2.9"
+mVersion = "0.3.0"
 def name():
 	return unicode(QApplication.translate("__init__", "MultiQml"))
 def description():
