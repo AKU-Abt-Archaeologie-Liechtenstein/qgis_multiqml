@@ -12,9 +12,11 @@ from ui_multiqml import Ui_MultiQmlForm
 
 # create the dialog for mapserver export
 class MultiQmlDlg(QDialog, Ui_MultiQmlForm): 
-	def __init__(self, parent): 
+	def __init__(self, parent, iface): 
 		QDialog.__init__(self, parent) 
 		self.setupUi(self) 
+
+		self.iface = iface
 
 		self.tmpQmlSrcList = []
 		self.mapLayers = QgsMapLayerRegistry.instance().mapLayers().values()
@@ -63,7 +65,8 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 					self.myPluginMessage( QApplication.translate("MultiQmlDlg", "Unable to apply qml style \"%1\" to layer \"%2\"\n%3.")\
 						.arg(self.fileNameStyle).arg(layer.name()).arg(message), "critical" )
 
-				layer.triggerRepaint()
+#				layer.triggerRepaint()
+			self.iface.mapCanvas().refresh()
 			self.settings.setValue( "multiqmlplugin/lastStyleDir", QVariant( os.path.dirname( unicode( self.fileNameStyle ) ) ) )
 		else:
 			self.myPluginMessage( QApplication.translate("MultiQmlDlg", "A style was not applied." ), "information" )
@@ -76,7 +79,8 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			message, isLoaded = layer.loadNamedStyle(self.tmpQmlSrcList[i.row()])
 			if not isLoaded: self.myPluginMessage( QApplication.translate("MultiQmlDlg",  "Unable to restory an initial style for layer \"%1\"\n%2.")\
 				.arg(layer.name()).arg(message), "critical" )
-			layer.triggerRepaint()
+#			layer.triggerRepaint()
+			self.iface.mapCanvas().refresh()
 	
 	@pyqtSignature( "" )
 	def on_pbnSelectAllLayers_clicked(self):

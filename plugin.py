@@ -55,7 +55,7 @@ class MultiQmlPlugin():
 	def run( self ):
 		if not self.isMultiQmlRun:
 			self.isMultiQmlRun = True
-			dlgMain = MultiQmlDlg( self.iface.mainWindow() )
+			dlgMain = MultiQmlDlg( self.iface.mainWindow(), self.iface )
 			dlgMain.show()
 			dlgMain.exec_()
 			self.isMultiQmlRun = False
