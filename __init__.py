@@ -10,7 +10,7 @@ if settings.value("locale/userLocale").toString() == "ru_RU":
 	translatorDlg.load(":/plugins/multiqml/translations/multiqml_ru")
 	QApplication.installTranslator(translatorDlg)
 	
-mVersion = "0.3.1"
+mVersion = "0.3.2"
 def name():
 	return unicode(QApplication.translate("__init__", "MultiQml"))
 def description():
