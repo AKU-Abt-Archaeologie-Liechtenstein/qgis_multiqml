@@ -61,19 +61,24 @@ class MultiQmlPlugin():
 			self.isMultiQmlRun = False
 
 	def about( self ):
-		dlgAbout = QDialog( self.iface.mainWindow() )
+		dlgAbout = QDialog()
 		dlgAbout.setWindowTitle( QApplication.translate("MultiQmlPlugin", "About", "Window title") )
 		lines = QVBoxLayout( dlgAbout )
-		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %1):</b>" ).arg(mVersion) ) )
+		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %1):</b>" ).arg(1) ) )
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "    The QGIS plugin for apply single qml style\n    to multiple raster or vector layers." ) ) )
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Developers:</b>" ) ) )
 		lines.addWidget( QLabel( "    Lynx (alex-86p@yandex.ru)" ) )
 		lines.addWidget( QLabel( "    Maxim Dubinin (sim@gis-lab.info)" ) )
 		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Link:</b>") ) )
-#		lines.addWidget( QLabel( "<homepage>http://gis-lab.info/qa/qgis-multiqml-eng.html</homepage>" ) )
+		#		lines.addWidget( QLabel( "<homepage>http://gis-lab.info/qa/qgis-multiqml-eng.html</homepage>" ) )
 		link = QLabel( QApplication.translate("MultiQmlPlugin", "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>" ) )
- 		link.setOpenExternalLinks( True )
- 		lines.addWidget( link )
+		link.setOpenExternalLinks( True )
+		lines.addWidget( link )
 
-		dlgAbout.exec_()
+		pbnClose = QPushButton(QApplication.translate("MultiQmlPlugin", "Close"))
+		lines.addWidget(pbnClose)
+
+		QObject.connect(pbnClose, SIGNAL("clicked()"), dlgAbout, SLOT("close()"))
+
+		dlgAbout.show()
 
