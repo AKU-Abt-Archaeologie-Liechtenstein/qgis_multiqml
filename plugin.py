@@ -80,5 +80,5 @@ class MultiQmlPlugin():
 
 		QObject.connect(pbnClose, SIGNAL("clicked()"), dlgAbout, SLOT("close()"))
 
-		dlgAbout.show()
+		dlgAbout.exec_()
 
