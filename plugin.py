@@ -21,7 +21,7 @@ import gettext
 
 from PyQt4.QtCore import QObject, SIGNAL, QTranslator
 from PyQt4.QtGui import QMainWindow, QApplication, QAction, QIcon, \
-	QDialog, QLabel, QWidget, QVBoxLayout
+	QDialog, QLabel, QWidget, QVBoxLayout, QPushButton
 
 from multiqml import MultiQmlDlg
 from __init__ import mVersion
