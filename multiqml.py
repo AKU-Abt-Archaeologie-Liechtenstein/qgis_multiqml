@@ -85,6 +85,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 	@pyqtSignature( "" )
 	def on_pbnSelectAllLayers_clicked(self):
 		self.lvMapLayers.selectAll()
+		self.pbnSelectAllLayers.setEnabled( True )
 
 	def loadMapLayers( self ):
 		layersNameList = QStringList()
@@ -92,6 +93,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			layersNameList.append( self.mapLayers[i].name() )
 			self.tmpQmlSrcList.append( tempfile.mktemp( '.qml' ) )
 			message, isSaved = self.mapLayers[i].saveNamedStyle(self.tmpQmlSrcList[i])
+		layersNameList.sort()
 
 		self.lvMapLayers.setModel( QStringListModel( layersNameList, self ) )
 		self.lvMapLayers.setSelectionMode(QAbstractItemView.MultiSelection)
