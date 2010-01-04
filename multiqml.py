@@ -93,7 +93,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			layersNameList.append( self.mapLayers[i].name() )
 			self.tmpQmlSrcList.append( tempfile.mktemp( '.qml' ) )
 			message, isSaved = self.mapLayers[i].saveNamedStyle(self.tmpQmlSrcList[i])
-		layersNameList.sort()
+		#layersNameList.sort()
 
 		self.lvMapLayers.setModel( QStringListModel( layersNameList, self ) )
 		self.lvMapLayers.setSelectionMode(QAbstractItemView.MultiSelection)
