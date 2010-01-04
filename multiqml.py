@@ -93,8 +93,10 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			layersNameList.append( self.mapLayers[i].name() )
 			self.tmpQmlSrcList.append( tempfile.mktemp( '.qml' ) )
 			message, isSaved = self.mapLayers[i].saveNamedStyle(self.tmpQmlSrcList[i])
-		#layersNameList.sort()
-
+		layersNameList.sort()
+		
+		print layersNameList.join(":")
+		
 		self.lvMapLayers.setModel( QStringListModel( layersNameList, self ) )
 		self.lvMapLayers.setSelectionMode(QAbstractItemView.MultiSelection)
 		self.lvMapLayers.setEditTriggers( QAbstractItemView.NoEditTriggers )
@@ -120,18 +122,32 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 
 	def on_rbnRasterLayers_toggled( self, checked ):
 		for i in range( len( self.mapLayers ) ):
-			if checked and ( self.mapLayers[i].type() != QgsMapLayer.VectorLayer ):
+			idx = self.lvMapLayers.model().index( i, 0 )
+			layerName = self.lvMapLayers.model().data( idx, 0 ).toString()
+			for j in range( len( self.mapLayers ) ):
+				if self.mapLayers[j].name() == layerName:
+					break
+			#print layerName + ":" + self.mapLayers[i].name()
+			if checked and ( self.mapLayers[j].type() != QgsMapLayer.VectorLayer ):
 				self.lvMapLayers.setRowHidden( i, False )
-			elif not checked and ( self.mapLayers[i].type() == QgsMapLayer.RasterLayer ):
+			elif not checked and ( self.mapLayers[j].type() == QgsMapLayer.RasterLayer ):
 				self.lvMapLayers.setRowHidden( i, True )
 			else:
 				self.lvMapLayers.setRowHidden( i, True )
 
 	def on_rbnVectorLayers_toggled( self, checked ):
 		for i in range( len( self.mapLayers ) ):
-			if checked and ( self.mapLayers[i].type() != QgsMapLayer.RasterLayer ):
+			idx = self.lvMapLayers.model().index(i,0)
+			layerName = self.lvMapLayers.model().data( idx, 0 ).toString()
+			idx = self.lvMapLayers.model().index( i, 0 )
+			layerName = self.lvMapLayers.model().data( idx, 0 ).toString()
+			for j in range( len( self.mapLayers ) ):
+				if self.mapLayers[j].name() == layerName:
+					break
+			#print layerName + ":" + self.mapLayers[i].name()
+			if checked and ( self.mapLayers[j].type() != QgsMapLayer.RasterLayer ):
 				self.lvMapLayers.setRowHidden( i, False )
-			elif not checked and ( self.mapLayers[i].type() == QgsMapLayer.VectorLayer ):
+			elif not checked and ( self.mapLayers[j].type() == QgsMapLayer.VectorLayer ):
 				self.lvMapLayers.setRowHidden( i, True )
 			else:
 				self.lvMapLayers.setRowHidden( i, True )
