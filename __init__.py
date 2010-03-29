@@ -1,16 +1,31 @@
-from PyQt4.QtCore import QTranslator, QSettings
+from PyQt4.QtCore import QTranslator, QSettings, QFileInfo, QVariant, QLocale
 from PyQt4.QtGui import QApplication
+from qgis.core import QgsApplication
 
 import resources
 
-settings = QSettings()
-if settings.value("locale/userLocale").toString() == "ru_RU":
-#	i18n Russian
-	translatorDlg = QTranslator()
-	translatorDlg.load(":/plugins/multiqml/translations/multiqml_ru")
-	QApplication.installTranslator(translatorDlg)
-	
-mVersion = "0.3.9"
+# For i18n support
+userPluginPath = QFileInfo( QgsApplication.qgisUserDbFilePath() ).path() + "/python/plugins/multiqml"
+systemPluginPath = QgsApplication.prefixPath() + "/python/plugins/multiqml"
+
+overrideLocale = QSettings().value( "locale/overrideFlag", QVariant( False ) ).toBool()
+if not overrideLocale:
+  localeFullName = QLocale.system().name()
+else:
+  localeFullName = QSettings().value( "locale/userLocale", QVariant( "" ) ).toString()
+
+if QFileInfo( userPluginPath ).exists():
+  translationPath = userPluginPath + "/translations/multiqml_" + localeFullName + ".qm"
+else:
+  translationPath = systemPluginPath + "/translations/multiqml_" + localeFullName + ".qm"
+
+localePath = translationPath
+if QFileInfo( localePath ).exists():
+  translator = QTranslator()
+  translator.load( localePath )
+  QApplication.installTranslator( translator )
+
+mVersion = "0.3.10"
 def name():
 	return unicode(QApplication.translate("__init__", "MultiQml"))
 def description():
