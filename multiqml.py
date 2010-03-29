@@ -11,10 +11,10 @@ from qgis.gui import *
 from ui_multiqml import Ui_MultiQmlForm
 
 # create the dialog for mapserver export
-class MultiQmlDlg(QDialog, Ui_MultiQmlForm): 
-	def __init__(self, parent, iface): 
-		QDialog.__init__(self, parent) 
-		self.setupUi(self) 
+class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
+	def __init__(self, parent, iface):
+		QDialog.__init__(self, parent)
+		self.setupUi(self)
 
 		self.iface = iface
 
@@ -50,7 +50,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			selected = self.lvMapLayers.selectedIndexes()
 			for i in selected:
 				layer = self.mapLayers[i.row()]
-				
+
 				if ( layer.type() == QgsMapLayer.VectorLayer ) and isRasterQml():
 					self.myPluginMessage( QApplication.translate("MultiQmlDlg", "Unable to apply raster qml style \"%1\" to vector layer \"%2\".")\
 						.arg(self.fileNameStyle).arg(layer.name()), "critical" )
@@ -61,7 +61,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 					continue
 
 				message, isLoaded = layer.loadNamedStyle(self.fileNameStyle)
-				if not isLoaded: 
+				if not isLoaded:
 					self.myPluginMessage( QApplication.translate("MultiQmlDlg", "Unable to apply qml style \"%1\" to layer \"%2\"\n%3.")\
 						.arg(self.fileNameStyle).arg(layer.name()).arg(message), "critical" )
 
@@ -81,11 +81,12 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 				.arg(layer.name()).arg(message), "critical" )
 #			layer.triggerRepaint()
 			self.iface.mapCanvas().refresh()
-	
+
 	@pyqtSignature( "" )
 	def on_pbnSelectAllLayers_clicked(self):
 		self.lvMapLayers.selectAll()
 		self.pbnSelectAllLayers.setEnabled( True )
+		self.pbnApplyStyle.setEnabled( True )
 
 	def loadMapLayers( self ):
 		layersNameList = QStringList()
@@ -94,16 +95,16 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			self.tmpQmlSrcList.append( tempfile.mktemp( '.qml' ) )
 			message, isSaved = self.mapLayers[i].saveNamedStyle(self.tmpQmlSrcList[i])
 		layersNameList.sort()
-		
-		print layersNameList.join(":")
-		
+
+		print "==DEBUG==", layersNameList.join(":")
+
 		self.lvMapLayers.setModel( QStringListModel( layersNameList, self ) )
-		self.lvMapLayers.setSelectionMode(QAbstractItemView.MultiSelection)
+		self.lvMapLayers.setSelectionMode(QAbstractItemView.ExtendedSelection)
 		self.lvMapLayers.setEditTriggers( QAbstractItemView.NoEditTriggers )
 
 		if self.lvMapLayers.model().rowCount() == 0:
 			self.pbnSelectAllLayers.setEnabled( False )
-		
+
 	@pyqtSignature( "" )
 	def on_pbnClose_clicked(self):
 		self.writeSettings()
@@ -144,7 +145,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 			for j in range( len( self.mapLayers ) ):
 				if self.mapLayers[j].name() == layerName:
 					break
-			#print layerName + ":" + self.mapLayers[i].name()
+			print "==DEBUG==", layerName + ":" + self.mapLayers[i].name()
 			if checked and ( self.mapLayers[j].type() != QgsMapLayer.RasterLayer ):
 				self.lvMapLayers.setRowHidden( i, False )
 			elif not checked and ( self.mapLayers[j].type() == QgsMapLayer.VectorLayer ):

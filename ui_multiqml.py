@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'multiqml.ui'
 #
-# Created: Tue Jan 27 23:40:57 2009
-#      by: PyQt4 UI code generator 4.4.4
+# Created: Mon Mar 29 21:53:54 2010
+#      by: PyQt4 UI code generator 4.5.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -45,6 +45,7 @@ class Ui_MultiQmlForm(object):
         sizePolicy.setHeightForWidth(self.lvMapLayers.sizePolicy().hasHeightForWidth())
         self.lvMapLayers.setSizePolicy(sizePolicy)
         self.lvMapLayers.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.lvMapLayers.setSelectionMode(QtGui.QAbstractItemView.ExtendedSelection)
         self.lvMapLayers.setObjectName("lvMapLayers")
         self.gridLayout.addWidget(self.lvMapLayers, 1, 0, 1, 1)
         self.verticalLayout = QtGui.QVBoxLayout()
