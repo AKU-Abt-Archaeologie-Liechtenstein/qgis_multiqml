@@ -25,7 +25,7 @@ if QFileInfo( localePath ).exists():
   translator.load( localePath )
   QApplication.installTranslator( translator )
 
-mVersion = "0.3.14"
+mVersion = "0.3.15"
 def name():
 	return unicode(QApplication.translate("__init__", "MultiQml"))
 def description():
