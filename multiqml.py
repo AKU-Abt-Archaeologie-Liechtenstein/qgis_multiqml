@@ -53,7 +53,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 		if not self.fileNameStyle.isEmpty():
 			selected = self.lvMapLayers.selectedIndexes()
 			for i in selected:
-				if version > 4:
+				if self.version > 4:
 				  layer = self.mapLayers[i.row()]
 				else:
 					layer = self.mapLayers[ self.dictLayers[ i.data().toString() ] ]
