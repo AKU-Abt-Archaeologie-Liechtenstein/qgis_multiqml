@@ -29,9 +29,19 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 		QObject.connect( self.lvMapLayers, SIGNAL( "clicked( const QModelIndex & )" ), self.doApplyStyleButtonEnabled )
 		QObject.connect( self.rbnRasterLayers, SIGNAL( "toggled( bool )" ), self.doApplyStyleButtonEnabled )
 		QObject.connect( self.rbnVectorLayers, SIGNAL( "toggled( bool )" ), self.doApplyStyleButtonEnabled )
+		QObject.connect( self.checkMakeDefault, SIGNAL( "stateChanged( int )" ), self.showWarning )
 
 		self.loadMapLayers()
 		self.readSettings()
+
+	def showWarning( self ):
+		#if self.checkMakeDefault.checkState() == Qt.Checked:
+		#	res = QMessageBox.warning( self, self.tr( "MultiQML" ),
+    #                    self.tr( "Enabling this option will cause overwriting of any existing QML files. Are you sure?" ),
+    #                    QMessageBox.Yes | QMessageBox.No )
+		#	if res != QMessageBox.Yes:
+		#		self.checkMakeDefault.setCheckState( Qt.Unchecked )
+		return
 
 	@pyqtSignature( "" )
 	def on_pbnApplyStyle_clicked(self):
@@ -72,6 +82,12 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 					self.myPluginMessage( QApplication.translate("MultiQmlDlg", "Unable to apply qml style \"%1\" to layer \"%2\"\n%3.")\
 						.arg(self.fileNameStyle).arg(layer.name()).arg(message), "critical" )
 
+				if self.checkMakeDefault.isChecked():
+					msg, res = layer.saveDefaultStyle()
+
+  			if self.version >= 5:
+	  			self.iface.legendInterface().refreshLayerSymbology( layer )
+
 			self.iface.mapCanvas().refresh()
 			self.settings.setValue( "multiqmlplugin/lastStyleDir", QVariant( os.path.dirname( unicode( self.fileNameStyle ) ) ) )
 		else:
@@ -82,12 +98,16 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 		selected = self.lvMapLayers.selectedIndexes()
 		for i in selected:
 			if self.version > 4:
-			  layer = self.mapLayers[i.row()]
+				layer = self.mapLayers[i.row()]
 			else:
 				layer = self.mapLayers[ self.dictLayers[ i.data().toString() ] ]
 			message, isLoaded = layer.loadNamedStyle(self.tmpQmlSrcList[i.row()])
 			if not isLoaded: self.myPluginMessage( QApplication.translate("MultiQmlDlg",  "Unable to restory an initial style for layer \"%1\"\n%2.")\
 				.arg(layer.name()).arg(message), "critical" )
+			if self.checkMakeDefault.isChecked():
+				msg, res = layer.saveDefaultStyle()
+			if self.version >= 5:
+				self.iface.legendInterface().refreshLayerSymbology( layer )
 			self.iface.mapCanvas().refresh()
 
 	@pyqtSignature( "" )
@@ -185,6 +205,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 		self.move( self.settings.value( "multiqmlplugin/pos", QVariant( QPoint( 0, 0 ) ) ).toPoint() )
 		self.rbnRasterLayers.setChecked( self.settings.value( "multiqmlplugin/isRasterChecked", QVariant( True ) ).toBool() )
 		self.rbnVectorLayers.setChecked( self.settings.value( "multiqmlplugin/isVectorChecked", QVariant( False ) ).toBool() )
+		self.checkMakeDefault.setCheckState( self.settings.value( "multiqmlplugin/saveDefault", QVariant( 0 ) ).toInt()[ 0 ] )
 
 	def writeSettings(self):
 		self.settings = QSettings( "Gis-Lab", "MultiQml" )
@@ -192,6 +213,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 		self.settings.setValue( "multiqmlplugin/pos", QVariant( self.pos() ) )
 		self.settings.setValue( "multiqmlplugin/isRasterChecked", QVariant( self.rbnRasterLayers.isChecked() ) )
 		self.settings.setValue( "multiqmlplugin/isVectorChecked", QVariant( self.rbnVectorLayers.isChecked() ) )
+		self.settings.setValue( "multiqmlplugin/saveDefault", QVariant( self.checkMakeDefault.checkState() ) )
 
 	def myPluginMessage( self, msg, type ):
 		if type == "information":

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'multiqml.ui'
 #
-# Created: Mon Mar 29 21:53:54 2010
+# Created: Fri Jul  9 21:41:45 2010
 #      by: PyQt4 UI code generator 4.5.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PyQt4 import QtCore, QtGui
 class Ui_MultiQmlForm(object):
     def setupUi(self, MultiQmlForm):
         MultiQmlForm.setObjectName("MultiQmlForm")
-        MultiQmlForm.resize(278, 189)
+        MultiQmlForm.resize(278, 206)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -47,7 +47,7 @@ class Ui_MultiQmlForm(object):
         self.lvMapLayers.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.lvMapLayers.setSelectionMode(QtGui.QAbstractItemView.ExtendedSelection)
         self.lvMapLayers.setObjectName("lvMapLayers")
-        self.gridLayout.addWidget(self.lvMapLayers, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.lvMapLayers, 1, 0, 2, 1)
         self.verticalLayout = QtGui.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.pbnApplyStyle = QtGui.QPushButton(MultiQmlForm)
@@ -62,7 +62,10 @@ class Ui_MultiQmlForm(object):
         self.pbnClose = QtGui.QPushButton(MultiQmlForm)
         self.pbnClose.setObjectName("pbnClose")
         self.verticalLayout.addWidget(self.pbnClose)
-        self.gridLayout.addLayout(self.verticalLayout, 1, 1, 1, 2)
+        self.gridLayout.addLayout(self.verticalLayout, 2, 1, 1, 2)
+        self.checkMakeDefault = QtGui.QCheckBox(MultiQmlForm)
+        self.checkMakeDefault.setObjectName("checkMakeDefault")
+        self.gridLayout.addWidget(self.checkMakeDefault, 1, 1, 1, 2)
         self.label.setBuddy(self.lvMapLayers)
 
         self.retranslateUi(MultiQmlForm)
@@ -83,4 +86,5 @@ class Ui_MultiQmlForm(object):
         self.pbnRestoreDefaultStyle.setText(QtGui.QApplication.translate("MultiQmlForm", "Restore initial style", None, QtGui.QApplication.UnicodeUTF8))
         self.pbnSelectAllLayers.setText(QtGui.QApplication.translate("MultiQmlForm", "Select all layers", None, QtGui.QApplication.UnicodeUTF8))
         self.pbnClose.setText(QtGui.QApplication.translate("MultiQmlForm", "Close", None, QtGui.QApplication.UnicodeUTF8))
+        self.checkMakeDefault.setText(QtGui.QApplication.translate("MultiQmlForm", "Save as default", None, QtGui.QApplication.UnicodeUTF8))
 
