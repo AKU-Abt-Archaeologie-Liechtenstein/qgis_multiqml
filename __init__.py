@@ -25,7 +25,7 @@ if QFileInfo( localePath ).exists():
   translator.load( localePath )
   QApplication.installTranslator( translator )
 
-mVersion = "0.3.17"
+mVersion = "0.3.18"
 def name():
 	return unicode(QApplication.translate("__init__", "MultiQml"))
 def description():
@@ -38,6 +38,8 @@ def authorName():
 	return "Gis-Lab"
 def homepage():
 	return QApplication.translate("__init__", "http://gis-lab.info/qa/qgis-multiqml-eng.html")
+def icon():
+	return "icon.png"
 def classFactory( iface ):
 	from plugin import MultiQmlPlugin
 	return MultiQmlPlugin( iface )
