@@ -1,0 +1,7 @@
+[general]
+name=MultiQml
+description=Apply single qml style to multiple raster or vector layers
+version=Version 0.3.19
+authorName=GIS-Lab
+icon=icon.png
+qgisMinimumVersion=1.0.0
