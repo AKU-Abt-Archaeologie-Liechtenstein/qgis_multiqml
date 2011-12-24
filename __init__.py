@@ -25,22 +25,24 @@ if QFileInfo( localePath ).exists():
   translator.load( localePath )
   QApplication.installTranslator( translator )
 
-mVersion = "0.3.19"
+mVersion = "0.3.20"
 def name():
-	return unicode(QApplication.translate("__init__", "MultiQml"))
+  return unicode(QApplication.translate("__init__", "MultiQml"))
 def description():
-	return unicode(QApplication.translate("__init__", "Apply single qml style to multiple raster or vector layers"))
+  return unicode(QApplication.translate("__init__", "Apply single qml style to multiple raster or vector layers"))
+def category():
+  return unicode(QApplication.translate("__init__", "Plugins"))
 def qgisMinimumVersion():
-	return "1.0"
+  return "1.0"
 def version():
-	return mVersion
+  return mVersion
 def authorName():
-	return "Gis-Lab"
+  return "Gis-Lab"
 def homepage():
-	return QApplication.translate("__init__", "http://gis-lab.info/qa/qgis-multiqml-eng.html")
+  return QApplication.translate("__init__", "http://gis-lab.info/qa/qgis-multiqml-eng.html")
 def icon():
-	return "icon.png"
+  return "icon.png"
 def classFactory( iface ):
-	from plugin import MultiQmlPlugin
-	return MultiQmlPlugin( iface )
+  from plugin import MultiQmlPlugin
+  return MultiQmlPlugin( iface )
 
