@@ -1,8 +1,19 @@
 [general]
-name=MultiQml
-description=Apply single qml style to multiple raster or vector layers
-category=Plugins
-version=Version 0.3.20
-authorName=GIS-Lab
-icon=icon.png
-qgisMinimumVersion=1.0.0
+name = MultiQml
+description = Apply single qml style to multiple raster or vector layers
+category = Plugins
+version = 0.3.21
+qgisMinimumVersion = 1.0.0
+
+icon = icon.png
+
+authorName = NextGIS
+
+tags = raster, vector, style
+
+homepage = http://gis-lab.info/qa/qgis-multiqml-eng.html
+tracker = http://hub.qgis.org/projects/multiqml
+repository = http://svn.gis-lab.info/multiqml
+
+experimental = False
+deprecated = False

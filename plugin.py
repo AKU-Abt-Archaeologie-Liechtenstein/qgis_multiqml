@@ -1,7 +1,7 @@
 """
 /***************************************************************************
-         MultiQml  -  The QGIS plugin for apply single qml to multiple raster 
-		 				or vector layers
+         MultiQml  -  The QGIS plugin for apply single qml to multiple raster
+            or vector layers
                              -------------------
     begin                : 2008-12-25
     copyright            : (C) 2008 by Lynx, Maxim Dubinin
@@ -21,64 +21,67 @@ import gettext
 
 from PyQt4.QtCore import QObject, SIGNAL, SLOT, QTranslator
 from PyQt4.QtGui import QMainWindow, QApplication, QAction, QIcon, \
-	QDialog, QLabel, QWidget, QVBoxLayout, QPushButton
+  QDialog, QLabel, QWidget, QVBoxLayout, QPushButton
 
 from multiqml import MultiQmlDlg
 from __init__ import mVersion
 
-import resources
+import resources_rc
 
 class MultiQmlPlugin():
-	def __init__( self, iface ):
-		self.iface = iface
+  def __init__( self, iface ):
+    self.iface = iface
 
-	def initGui( self ):
-		self.actionRun = QAction( QIcon( ":/plugins/multiqml/icon.png" ),\
-			QApplication.translate("MultiQmlPlugin", "MultiQml" ), self.iface.mainWindow() )
-		self.actionRun.setWhatsThis( QApplication.translate("MultiQmlPlugin", "Apply single qml style to multiple raster or vector layers") )
-		self.actionAbout = QAction( QApplication.translate("MultiQmlPlugin", "About" ), self.iface.mainWindow() )
+  def initGui( self ):
+    self.actionRun = QAction( QIcon( ":/plugins/multiqml/icon.png" ),\
+      QApplication.translate("MultiQmlPlugin", "MultiQml" ), self.iface.mainWindow() )
+    self.actionRun.setWhatsThis( QApplication.translate("MultiQmlPlugin", "Apply single qml style to multiple raster or vector layers") )
+    self.actionAbout = QAction( QApplication.translate("MultiQmlPlugin", "About" ), self.iface.mainWindow() )
 
-		QObject.connect( self.actionRun, SIGNAL( "triggered()" ), self.run )
-		QObject.connect( self.actionAbout, SIGNAL( "triggered()" ), self.about )
+    QObject.connect( self.actionRun, SIGNAL( "triggered()" ), self.run )
+    QObject.connect( self.actionAbout, SIGNAL( "triggered()" ), self.about )
 
-		self.iface.addToolBarIcon(self.actionRun)
-		self.iface.addPluginToMenu( QApplication.translate("MultiQmlPlugin", "&MultiQml" ), self.actionRun )
-		self.iface.addPluginToMenu( QApplication.translate("MultiQmlPlugin", "&MultiQml" ), self.actionAbout )
+    self.iface.addToolBarIcon(self.actionRun)
+    self.iface.addPluginToMenu( QApplication.translate("MultiQmlPlugin", "&MultiQml" ), self.actionRun )
+    self.iface.addPluginToMenu( QApplication.translate("MultiQmlPlugin", "&MultiQml" ), self.actionAbout )
 
-		self.isMultiQmlRun = False
+    self.isMultiQmlRun = False
 
-	def unload( self ):
-		self.iface.removePluginMenu( QApplication.translate("MultiQmlPlugin", "&MultiQml" ), self.actionRun )
-		self.iface.removePluginMenu( QApplication.translate("MultiQmlPlugin", "&MultiQml" ), self.actionAbout )
-		self.iface.removeToolBarIcon(self.actionRun)
+  def unload( self ):
+    self.iface.removePluginMenu( QApplication.translate("MultiQmlPlugin", "&MultiQml" ), self.actionRun )
+    self.iface.removePluginMenu( QApplication.translate("MultiQmlPlugin", "&MultiQml" ), self.actionAbout )
+    self.iface.removeToolBarIcon(self.actionRun)
 
-	def run( self ):
-		if not self.isMultiQmlRun:
-			self.isMultiQmlRun = True
-			dlgMain = MultiQmlDlg( self.iface.mainWindow(), self.iface )
-			dlgMain.show()
-			dlgMain.exec_()
-			self.isMultiQmlRun = False
+  def run( self ):
+    if not self.isMultiQmlRun:
+      self.isMultiQmlRun = True
+      dlgMain = MultiQmlDlg( self.iface.mainWindow(), self.iface )
+      dlgMain.show()
+      dlgMain.exec_()
+      self.isMultiQmlRun = False
 
-	def about( self ):
-		dlgAbout = QDialog()
-		dlgAbout.setWindowTitle( QApplication.translate("MultiQmlPlugin", "About", "Window title") )
-		lines = QVBoxLayout( dlgAbout )
-		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %1):</b>" ).arg(mVersion) ) )
-		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "    This plugin takes single qml style and\n    applies it to multiple raster or vector layers" ) ) )
-		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Developers:</b>" ) ) )
-		lines.addWidget( QLabel( "    Lynx (alex-86p@yandex.ru)" ) )
-		lines.addWidget( QLabel( "    Maxim Dubinin (sim@gis-lab.info)" ) )
-		lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Link:</b>") ) )
-		#		lines.addWidget( QLabel( "<homepage>http://gis-lab.info/qa/qgis-multiqml-eng.html</homepage>" ) )
-		link = QLabel( QApplication.translate("MultiQmlPlugin", "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>" ) )
-		link.setOpenExternalLinks( True )
-		lines.addWidget( link )
+  def about( self ):
+    dlgAbout = QDialog()
+    dlgAbout.setWindowTitle( QApplication.translate("MultiQmlPlugin", "About", "Window title") )
+    lines = QVBoxLayout( dlgAbout )
+    lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %1):</b>" ).arg(mVersion) ) )
+    lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "    This plugin takes single qml style and\napplies it to multiple raster or vector layers" ) ) )
+    lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Developers:</b>" ) ) )
+    lines.addWidget( QLabel( "    Lynx (alex-86p@yandex.ru)" ) )
+    lines.addWidget( QLabel( "    Maxim Dubinin (sim@gis-lab.info)" ) )
+    lines.addWidget( QLabel( "    Alexander Bruy" ) )
+    lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Link:</b>") ) )
+    linkPage = QLabel( QApplication.translate("MultiQmlPlugin", "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>" ) )
+    linkPage.setOpenExternalLinks( True )
+    lines.addWidget( linkPage )
+    linkBugs = QLabel( QApplication.translate("MultiQmlPlugin", "<a href=\"http://hub.qgis.org/projects/multiqml\">http://hub.qgis.org/projects/multiqml</a>" ) )
+    linkBugs.setOpenExternalLinks( True )
+    lines.addWidget( linkBugs )
 
-		pbnClose = QPushButton(QApplication.translate("MultiQmlPlugin", "Close"))
-		lines.addWidget(pbnClose)
+    pbnClose = QPushButton(QApplication.translate("MultiQmlPlugin", "Close"))
+    lines.addWidget(pbnClose)
 
-		QObject.connect(pbnClose, SIGNAL("clicked()"), dlgAbout, SLOT("close()"))
+    QObject.connect(pbnClose, SIGNAL("clicked()"), dlgAbout, SLOT("close()"))
 
-		dlgAbout.exec_()
+    dlgAbout.exec_()
 
