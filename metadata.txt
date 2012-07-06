@@ -2,7 +2,7 @@
 name = MultiQml
 description = Apply single qml style to multiple raster or vector layers
 category = Plugins
-version = 0.3.21
+version = 0.3.22
 qgisMinimumVersion = 1.0.0
 
 icon = icon.png

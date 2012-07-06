@@ -23,7 +23,7 @@ if QFileInfo( localePath ).exists():
   translator.load( localePath )
   QApplication.installTranslator( translator )
 
-mVersion = "0.3.21"
+mVersion = "0.3.22"
 def name():
   return unicode(QApplication.translate("__init__", "MultiQml"))
 def description():
@@ -33,7 +33,7 @@ def category():
 def qgisMinimumVersion():
   return "1.0"
 def version():
-  return "0.3.21"
+  return "0.3.22"
 def authorName():
   return "NextGIS"
 def homepage():
