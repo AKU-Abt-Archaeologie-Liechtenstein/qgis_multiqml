@@ -33,7 +33,6 @@ import gettext
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from qgis.core import *
-from qgis.gui import *
 
 from ui_multiqml import Ui_MultiQmlForm
 
@@ -108,7 +107,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
       qmlFile.close()
       return result
 
-    myLastUsedDir = self.settings.value( "multiqmlplugin/lastStyleDir" )
+    myLastUsedDir = self.settings.value( "lastStyleDir" )
     self.fileNameStyle = QFileDialog.getOpenFileName(self, QCoreApplication.translate("MultiQmlDlg", "Open style"), myLastUsedDir, QCoreApplication.translate("MultiQmlDlg", "QGIS apply style file (*.qml)"))
     
     if self.fileNameStyle != "":
@@ -138,7 +137,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
         self.iface.legendInterface().refreshLayerSymbology( layer )
 
       self.iface.mapCanvas().refresh()
-      self.settings.setValue( "multiqmlplugin/lastStyleDir", os.path.dirname( unicode( self.fileNameStyle ) ) )
+      self.settings.setValue( "lastStyleDir", os.path.dirname( unicode( self.fileNameStyle ) ) )
     else:
       self.myPluginMessage( QCoreApplication.translate("MultiQmlDlg", "A style was not applied." ), "information" )
 
