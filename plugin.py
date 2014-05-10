@@ -1,30 +1,38 @@
-"""
-/***************************************************************************
-         MultiQml  -  The QGIS plugin for apply single qml to multiple raster
-            or vector layers
-                             -------------------
-    begin                : 2008-12-25
-    copyright            : (C) 2008 by Lynx, Maxim Dubinin
- ***************************************************************************/
+# -*- coding: utf-8 -*-
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-"""
+#******************************************************************************
+#
+# MultiQML
+# ---------------------------------------------------------
+# Apply uniform style from QML file to multiple raster or vector layers
+#
+# Copyright (C) 2008-2014 NextGIS (info@nextgis.org)
+#
+# This source is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation, either version 2 of the License, or (at your option)
+# any later version.
+#
+# This code is distributed in the hope that it will be useful, but WITHOUT ANY
+# WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+# details.
+#
+# A copy of the GNU General Public License is available on the World Wide Web
+# at <http://www.gnu.org/licenses/>. You can also obtain it by writing
+# to the Free Software Foundation, 51 Franklin Street, Suite 500 Boston,
+# MA 02110-1335 USA.
+#
+#******************************************************************************
 
 import gettext
 
-from PyQt4.QtCore import QObject, SIGNAL, SLOT, QTranslator
-from PyQt4.QtGui import QMainWindow, QApplication, QAction, QIcon, \
-  QDialog, QLabel, QWidget, QVBoxLayout, QPushButton
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
+from qgis.core import *
+from qgis.gui import *
 
 from multiqml import MultiQmlDlg
-from __init__ import mVersion
 
 import resources_rc
 
@@ -64,7 +72,8 @@ class MultiQmlPlugin():
     dlgAbout = QDialog()
     dlgAbout.setWindowTitle( QApplication.translate("MultiQmlPlugin", "About", "Window title") )
     lines = QVBoxLayout( dlgAbout )
-    lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %1):</b>" ).arg(mVersion) ) )
+    #add version back
+    lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %1):</b>" ) ) )
     lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "    This plugin takes single qml style and\napplies it to multiple raster or vector layers" ) ) )
     lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Developers:</b>" ) ) )
     lines.addWidget( QLabel( "    Lynx (alex-86p@yandex.ru)" ) )
@@ -74,7 +83,7 @@ class MultiQmlPlugin():
     linkPage = QLabel( QApplication.translate("MultiQmlPlugin", "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>" ) )
     linkPage.setOpenExternalLinks( True )
     lines.addWidget( linkPage )
-    linkBugs = QLabel( QApplication.translate("MultiQmlPlugin", "<a href=\"http://hub.qgis.org/projects/multiqml\">http://hub.qgis.org/projects/multiqml</a>" ) )
+    linkBugs = QLabel( QApplication.translate("MultiQmlPlugin", "<a href=\"https://github.com/nextgis/MultiQML\">https://github.com/nextgis/MultiQML</a>" ) )
     linkBugs.setOpenExternalLinks( True )
     lines.addWidget( linkBugs )
 
