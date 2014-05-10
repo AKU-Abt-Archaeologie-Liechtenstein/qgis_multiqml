@@ -7,7 +7,9 @@ qgisMinimumVersion = 2.0.0
 
 icon = icon.png
 
+author = NextGIS
 authorName = NextGIS
+email = info@nextgis.org
 
 tags = raster, vector, style
 
