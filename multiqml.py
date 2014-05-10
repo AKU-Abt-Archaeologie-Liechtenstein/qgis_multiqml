@@ -37,10 +37,9 @@ from qgis.gui import *
 
 from ui_multiqml import Ui_MultiQmlForm
 
-# create the dialog for mapserver export
+# create the dialog
 class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
   def __init__(self, parent, iface):
-  
     self.iface = iface
 
     userPluginPath = QFileInfo(
@@ -110,7 +109,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
       return result
 
     myLastUsedDir = self.settings.value( "multiqmlplugin/lastStyleDir" )
-    self.fileNameStyle = QFileDialog.getOpenFileName(self, QApplication.translate("MultiQmlDlg", "Open style"), myLastUsedDir, QApplication.translate("MultiQmlDlg", "QGIS apply style file (*.qml)"))
+    self.fileNameStyle = QFileDialog.getOpenFileName(self, QCoreApplication.translate("MultiQmlDlg", "Open style"), myLastUsedDir, QCoreApplication.translate("MultiQmlDlg", "QGIS apply style file (*.qml)"))
     
     if self.fileNameStyle != "":
       selected = self.lvMapLayers.selectedIndexes()
@@ -119,18 +118,18 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
         layer = self.mapLayers[i.row()]
 
         if ( layer.type() == QgsMapLayer.VectorLayer ) and isRasterQml():
-          self.myPluginMessage( QApplication.translate("MultiQmlDlg", "Unable to apply raster qml style \"%1\" to vector layer \"%2\".")\
+          self.myPluginMessage( QCoreApplication.translate("MultiQmlDlg", "Unable to apply raster qml style \"%1\" to vector layer \"%2\".")\
             .arg(self.fileNameStyle).arg(layer.name()), "critical" )
           continue
         elif ( layer.type() == QgsMapLayer.RasterLayer ) and not isRasterQml():
-          self.myPluginMessage( QApplication.translate("MultiQmlDlg", "Unable to apply vector qml style \"%1\" to raster layer \"%2\".")\
+          self.myPluginMessage( QCoreApplication.translate("MultiQmlDlg", "Unable to apply vector qml style \"%1\" to raster layer \"%2\".")\
             .arg(self.fileNameStyle).arg(layer.name()), "critical" )
           continue
 
         message, isLoaded = layer.loadNamedStyle(self.fileNameStyle)
 
         if not isLoaded:
-          self.myPluginMessage( QApplication.translate("MultiQmlDlg", "Unable to apply qml style \"%1\" to layer \"%2\"\n%3.")\
+          self.myPluginMessage( QCoreApplication.translate("MultiQmlDlg", "Unable to apply qml style \"%1\" to layer \"%2\"\n%3.")\
             .arg(self.fileNameStyle).arg(layer.name()).arg(message), "critical" )
 
         if self.checkMakeDefault.isChecked():
@@ -141,7 +140,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
       self.iface.mapCanvas().refresh()
       self.settings.setValue( "multiqmlplugin/lastStyleDir", os.path.dirname( unicode( self.fileNameStyle ) ) )
     else:
-      self.myPluginMessage( QApplication.translate("MultiQmlDlg", "A style was not applied." ), "information" )
+      self.myPluginMessage( QCoreApplication.translate("MultiQmlDlg", "A style was not applied." ), "information" )
 
   @pyqtSignature( "" )
   def on_pbnRestoreDefaultStyle_clicked(self):
@@ -150,7 +149,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
       layer = self.mapLayers[i.row()]
       
       message, isLoaded = layer.loadNamedStyle(self.tmpQmlSrcList[i.row()])
-      if not isLoaded: self.myPluginMessage( QApplication.translate("MultiQmlDlg",  "Unable to restory an initial style for layer \"%1\"\n%2.")\
+      if not isLoaded: self.myPluginMessage( QCoreApplication.translate("MultiQmlDlg",  "Unable to restory an initial style for layer \"%1\"\n%2.")\
         .arg(layer.name()).arg(message), "critical" )
       if self.checkMakeDefault.isChecked():
         msg, res = layer.saveDefaultStyle()
@@ -207,12 +206,12 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
         else:
           self.lvMapLayers.setRowHidden( i, True )
 
-    if checked and ( self.mapLayers[i].type() != QgsMapLayer.VectorLayer ):
-      self.lvMapLayers.setRowHidden( i, False )
-    elif not checked and ( self.mapLayers[i].type() == QgsMapLayer.RasterLayer ):
-      self.lvMapLayers.setRowHidden( i, True )
-    else:
-      self.lvMapLayers.setRowHidden( i, True )
+        if checked and ( self.mapLayers[i].type() != QgsMapLayer.VectorLayer ):
+          self.lvMapLayers.setRowHidden( i, False )
+        elif not checked and ( self.mapLayers[i].type() == QgsMapLayer.RasterLayer ):
+          self.lvMapLayers.setRowHidden( i, True )
+        else:
+          self.lvMapLayers.setRowHidden( i, True )
 
   def on_rbnVectorLayers_toggled( self, checked ):
     for i in range( len( self.mapLayers ) ):
@@ -228,12 +227,12 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
         else:
           self.lvMapLayers.setRowHidden( i, True )
 
-    if checked and ( self.mapLayers[i].type() != QgsMapLayer.RasterLayer ):
-      self.lvMapLayers.setRowHidden( i, False )
-    elif not checked and ( self.mapLayers[i].type() == QgsMapLayer.VectorLayer ):
-      self.lvMapLayers.setRowHidden( i, True )
-    else:
-      self.lvMapLayers.setRowHidden( i, True )
+        if checked and ( self.mapLayers[i].type() != QgsMapLayer.RasterLayer ):
+          self.lvMapLayers.setRowHidden( i, False )
+        elif not checked and ( self.mapLayers[i].type() == QgsMapLayer.VectorLayer ):
+          self.lvMapLayers.setRowHidden( i, True )
+        else:
+          self.lvMapLayers.setRowHidden( i, True )
 
   def readSettings(self):
     self.settings = QSettings( "NextGIS", "MultiQml" )
@@ -253,6 +252,6 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 
   def myPluginMessage( self, msg, type ):
     if type == "information":
-      QMessageBox.information(self, QApplication.translate("MultiQmlDlg", "Information"), msg )
+      QMessageBox.information(self, QCoreApplication.translate("MultiQmlDlg", "Information"), msg )
     elif type == "critical":
-      QMessageBox.critical(self, QApplication.translate("MultiQmlDlg", "Error"), msg )
+      QMessageBox.critical(self, QCoreApplication.translate("MultiQmlDlg", "Error"), msg )
