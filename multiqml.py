@@ -239,7 +239,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
     self.move( self.settings.value( "pos", QPoint( 0, 0 ) ) )
     self.rbnRasterLayers.setChecked( self.settings.value( "isRasterChecked", True, type=bool ) )
     self.rbnVectorLayers.setChecked( self.settings.value( "isVectorChecked", False, type=bool ) )
-    self.checkMakeDefault.setCheckState( self.settings.value( "saveDefault", 0 ) )
+    self.checkMakeDefault.setCheckState( self.settings.value( "saveDefault", 0, type=int ) )
 
   def writeSettings(self):
     self.settings = QSettings( "NextGIS", "MultiQml" )
