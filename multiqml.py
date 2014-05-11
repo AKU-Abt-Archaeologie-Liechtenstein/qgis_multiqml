@@ -40,32 +40,6 @@ from ui_multiqml import Ui_MultiQmlForm
 class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
   def __init__(self, parent, iface):
     self.iface = iface
-
-    userPluginPath = QFileInfo(
-            QgsApplication.qgisUserDbFilePath()).path() + \
-            '/python/plugins/multiqml'
-    systemPluginPath = QgsApplication.prefixPath() + \
-            '/python/plugins/multiqml'
-
-    overrideLocale = QSettings().value('locale/overrideFlag', False,
-                                       type=bool)
-    if not overrideLocale:
-        localeFullName = QLocale.system().name()
-    else:
-        localeFullName = QSettings().value('locale/userLocale', '')
-
-    if QFileInfo(userPluginPath).exists():
-        translationPath = userPluginPath + '/i18n/multiqml_' + \
-                          localeFullName + '.qm'
-    else:
-        translationPath = systemPluginPath + '/i18n/multiqml_' + \
-                          localeFullName + '.qm'
-
-    self.localePath = translationPath
-    if QFileInfo(self.localePath).exists():
-        self.translator = QTranslator()
-        self.translator.load(self.localePath)
-        QCoreApplication.installTranslator(self.translator)
   
     QDialog.__init__(self, parent)
     self.setupUi(self)
