@@ -106,10 +106,10 @@ class MultiQmlPlugin():
     lines.addWidget( QLabel( "    Maxim Dubinin (sim@gis-lab.info)" ) )
     lines.addWidget( QLabel( "    Alexander Bruy" ) )
     lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Link:</b>") ) )
-    linkPage = QLabel( QApplication.translate("MultiQmlPlugin", "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>" ) )
+    linkPage = QLabel( "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>" )
     linkPage.setOpenExternalLinks( True )
     lines.addWidget( linkPage )
-    linkBugs = QLabel( QApplication.translate("MultiQmlPlugin", "<a href=\"https://github.com/nextgis/MultiQML\">https://github.com/nextgis/MultiQML</a>" ) )
+    linkBugs = QLabel( "<a href=\"https://github.com/nextgis/MultiQML\">https://github.com/nextgis/MultiQML</a>")
     linkBugs.setOpenExternalLinks( True )
     lines.addWidget( linkBugs )
 

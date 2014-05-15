@@ -59,12 +59,12 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
     self.readSettings()
 
   def showWarning( self ):
-    #if self.checkMakeDefault.checkState() == Qt.Checked:
-    # res = QMessageBox.warning( self, self.tr( "MultiQML" ),
-    #                    self.tr( "Enabling this option will cause overwriting of any existing QML files. Are you sure?" ),
-    #                    QMessageBox.Yes | QMessageBox.No )
-    # if res != QMessageBox.Yes:
-    #   self.checkMakeDefault.setCheckState( Qt.Unchecked )
+    if self.checkMakeDefault.checkState() == Qt.Checked:
+     res = QMessageBox.warning( self, QCoreApplication.translate("MultiQmlDlg", "MultiQML" ),
+                        QCoreApplication.translate("MultiQmlDlg", "Enabling this option will cause overwriting of any existing QML files. Are you sure?" ),
+                        QMessageBox.Yes | QMessageBox.No )
+     if res != QMessageBox.Yes:
+       self.checkMakeDefault.setCheckState( Qt.Unchecked )
     return
 
   @pyqtSignature( "" )
@@ -213,7 +213,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
     self.move( self.settings.value( "pos", QPoint( 0, 0 ) ) )
     self.rbnRasterLayers.setChecked( self.settings.value( "isRasterChecked", True, type=bool ) )
     self.rbnVectorLayers.setChecked( self.settings.value( "isVectorChecked", False, type=bool ) )
-    self.checkMakeDefault.setCheckState( self.settings.value( "saveDefault", 0, type=int ) )
+    #self.checkMakeDefault.setCheckState( self.settings.value( "saveDefault", 0, type=int ) )
 
   def writeSettings(self):
     self.settings = QSettings( "NextGIS", "MultiQml" )
@@ -221,7 +221,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
     self.settings.setValue( "pos", self.pos() )
     self.settings.setValue( "isRasterChecked", self.rbnRasterLayers.isChecked())
     self.settings.setValue( "isVectorChecked", self.rbnVectorLayers.isChecked())
-    self.settings.setValue( "saveDefault", self.checkMakeDefault.checkState() )
+    #self.settings.setValue( "saveDefault", self.checkMakeDefault.checkState() )
 
   def myPluginMessage( self, msg, type ):
     if type == "information":

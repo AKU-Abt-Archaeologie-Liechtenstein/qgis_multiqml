@@ -4,4 +4,4 @@ SOURCES = __init__.py \
 
 FORMS = multiqml.ui
 
-TRANSLATIONS = i18n/multiqml_ru_RU.ts
+TRANSLATIONS = i18n/multiqml_ru.ts
