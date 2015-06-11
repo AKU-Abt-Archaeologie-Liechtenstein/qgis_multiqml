@@ -74,7 +74,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
       line = qmlFile.readline()
       result = False
       while line != "":
-        if "<rasterproperties>" in line:
+        if "<rasterproperties>" in line or "<rasterrenderer" in line:
           result = True
           break
         line = qmlFile.readline()
