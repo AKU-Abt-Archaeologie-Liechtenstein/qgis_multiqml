@@ -68,6 +68,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
     return
 
   @pyqtSignature( "" )
+  
   def on_pbnApplyStyle_clicked(self):
     def isRasterQml():
       qmlFile = open( self.fileNameStyle, "rb" )
@@ -109,8 +110,10 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
           msg, res = layer.saveDefaultStyle()
 
         self.iface.legendInterface().refreshLayerSymbology( layer )
-
-      self.iface.mapCanvas().refresh()
+        layer.triggerRepaint()
+      
+      #mapCanvas refresh is not working anymore
+      #self.iface.mapCanvas().refresh()
       self.settings.setValue( "lastStyleDir", os.path.dirname( unicode( self.fileNameStyle ) ) )
     else:
       self.myPluginMessage( QCoreApplication.translate("MultiQmlDlg", "A style was not applied." ), "information" )
