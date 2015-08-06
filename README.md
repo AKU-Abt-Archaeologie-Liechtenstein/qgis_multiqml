@@ -12,3 +12,5 @@ More info:
 EN: http://gis-lab.info/qa/qgis-multiqml-eng.html
 
 RU: http://gis-lab.info/qa/qgis-multiqml.html
+
+QGIS plugin page: http://plugins.qgis.org/plugins/multiqml/
