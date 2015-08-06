@@ -24,8 +24,10 @@
 # MA 02110-1335 USA.
 #
 #******************************************************************************
+from ConfigParser import ConfigParser
 
 import gettext
+import os
 
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -99,7 +101,7 @@ class MultiQmlPlugin():
     dlgAbout.setWindowTitle( QApplication.translate("MultiQmlPlugin", "About", "Window title") )
     lines = QVBoxLayout( dlgAbout )
     #add version back
-    lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %1):</b>" ) ) )
+    lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %s):</b>" ) % self.get_version() ) )
     lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "    This plugin takes single qml style and\napplies it to multiple raster or vector layers" ) ) )
     lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Developers:</b>" ) ) )
     lines.addWidget( QLabel( "    Lynx (alex-86p@yandex.ru)" ) )
@@ -119,4 +121,14 @@ class MultiQmlPlugin():
     QObject.connect(pbnClose, SIGNAL("clicked()"), dlgAbout, SLOT("close()"))
 
     dlgAbout.exec_()
+
+  def get_version(self):
+    try:
+      CURR_PATH = os.path.dirname(__file__)
+      cp = ConfigParser()
+      cp.readfp(open(os.path.join(CURR_PATH, 'metadata.txt')))
+      return cp.get('general', 'version')
+    except:
+      return '?'
+
 
