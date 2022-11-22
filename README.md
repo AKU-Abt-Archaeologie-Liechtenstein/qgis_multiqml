@@ -3,7 +3,7 @@ MultiQML
 
 Apply single .qml style to multiple raster or vector layers
 
-Compatible with QGIS 2.0
+Compatible with QGIS 3.0
 
 Translations are welcome.
 

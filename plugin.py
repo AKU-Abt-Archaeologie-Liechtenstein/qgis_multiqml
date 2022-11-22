@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-#******************************************************************************
+# ******************************************************************************
 #
 # MultiQML
 # ---------------------------------------------------------
@@ -23,112 +23,121 @@
 # to the Free Software Foundation, 51 Franklin Street, Suite 500 Boston,
 # MA 02110-1335 USA.
 #
-#******************************************************************************
-from ConfigParser import ConfigParser
+# ******************************************************************************
+from configparser import ConfigParser
 
-import gettext
 import os
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from qgis.PyQt.QtCore import *
+from qgis.PyQt.QtGui import *
 from qgis.core import *
 from qgis.gui import *
+from qgis.PyQt.QtWidgets import (QAction,
+                                 QApplication,
+                                 QLabel,
+                                 QDialog,
+                                 QVBoxLayout,
+                                 QPushButton,
+                                 )
 
-from multiqml import MultiQmlDlg
+from .multiqml import MultiQmlDlg
 
-import resources_rc
+from . import resources
+
 
 class MultiQmlPlugin():
-  def __init__( self, iface ):
-    self.iface = iface
-    
-    userPluginPath = QFileInfo(
-            QgsApplication.qgisUserDbFilePath()).path() + \
-            '/python/plugins/multiqml'
-    systemPluginPath = QgsApplication.prefixPath() + \
-            '/python/plugins/multiqml'
+    def __init__(self, iface):
+        self.iface = iface
 
-    overrideLocale = QSettings().value('locale/overrideFlag', False,
-                                       type=bool)
-    if not overrideLocale:
-        localeFullName = QLocale.system().name()
-    else:
-        localeFullName = QSettings().value('locale/userLocale', '')
+        userPluginPath = QFileInfo(
+            QgsApplication.qgisUserDatabaseFilePath()).path() + \
+                         '/python/plugins/multiqml'
+        systemPluginPath = QgsApplication.prefixPath() + \
+                           '/python/plugins/multiqml'
 
-    if QFileInfo(userPluginPath).exists():
-        translationPath = userPluginPath + '/i18n/multiqml_' + \
-                          localeFullName + '.qm'
-    else:
-        translationPath = systemPluginPath + '/i18n/multiqml_' + \
-                          localeFullName + '.qm'
+        overrideLocale = QSettings().value('locale/overrideFlag', False,
+                                           type=bool)
+        if not overrideLocale:
+            localeFullName = QLocale.system().name()
+        else:
+            localeFullName = QSettings().value('locale/userLocale', '')
 
-    self.localePath = translationPath
-    if QFileInfo(self.localePath).exists():
-        self.translator = QTranslator()
-        self.translator.load(self.localePath)
-        QCoreApplication.installTranslator(self.translator)
-        
-  def initGui( self ):
-    self.actionRun = QAction( QIcon( ":/plugins/multiqml/icon.png" ),\
-      QApplication.translate("MultiQmlPlugin", "MultiQml" ), self.iface.mainWindow() )
-    self.actionRun.setWhatsThis( QApplication.translate("MultiQmlPlugin", "Apply single qml style to multiple raster or vector layers") )
-    self.actionAbout = QAction( QApplication.translate("MultiQmlPlugin", "About" ), self.iface.mainWindow() )
+        if QFileInfo(userPluginPath).exists():
+            translationPath = userPluginPath + '/i18n/multiqml_' + \
+                              localeFullName + '.qm'
+        else:
+            translationPath = systemPluginPath + '/i18n/multiqml_' + \
+                              localeFullName + '.qm'
 
-    QObject.connect( self.actionRun, SIGNAL( "triggered()" ), self.run )
-    QObject.connect( self.actionAbout, SIGNAL( "triggered()" ), self.about )
+        self.localePath = translationPath
+        if QFileInfo(self.localePath).exists():
+            self.translator = QTranslator()
+            self.translator.load(self.localePath)
+            QCoreApplication.installTranslator(self.translator)
 
-    self.iface.addToolBarIcon(self.actionRun)
-    self.iface.addPluginToMenu( QApplication.translate("MultiQmlPlugin", "&MultiQml" ), self.actionRun )
-    self.iface.addPluginToMenu( QApplication.translate("MultiQmlPlugin", "&MultiQml" ), self.actionAbout )
+    def initGui(self):
+        self.actionRun = QAction(QIcon(":/plugins/multiqml/icon.png"), \
+                                 QApplication.translate("MultiQmlPlugin", "MultiQml"), self.iface.mainWindow())
+        self.actionRun.setWhatsThis(
+            QApplication.translate("MultiQmlPlugin", "Apply single qml style to multiple raster or vector layers"))
+        self.actionAbout = QAction(QApplication.translate("MultiQmlPlugin", "About"), self.iface.mainWindow())
 
-    self.isMultiQmlRun = False
+        self.actionRun.triggered.connect(self.run)
+        self.actionAbout.triggered.connect(self.about)
 
-  def unload( self ):
-    self.iface.removePluginMenu( QApplication.translate("MultiQmlPlugin", "&MultiQml" ), self.actionRun )
-    self.iface.removePluginMenu( QApplication.translate("MultiQmlPlugin", "&MultiQml" ), self.actionAbout )
-    self.iface.removeToolBarIcon(self.actionRun)
+        self.iface.addToolBarIcon(self.actionRun)
+        self.iface.addPluginToMenu(QApplication.translate("MultiQmlPlugin", "&MultiQml"), self.actionRun)
+        self.iface.addPluginToMenu(QApplication.translate("MultiQmlPlugin", "&MultiQml"), self.actionAbout)
 
-  def run( self ):
-    if not self.isMultiQmlRun:
-      self.isMultiQmlRun = True
-      dlgMain = MultiQmlDlg( self.iface.mainWindow(), self.iface )
-      dlgMain.show()
-      dlgMain.exec_()
-      self.isMultiQmlRun = False
+        self.isMultiQmlRun = False
 
-  def about( self ):
-    dlgAbout = QDialog()
-    dlgAbout.setWindowTitle( QApplication.translate("MultiQmlPlugin", "About", "Window title") )
-    lines = QVBoxLayout( dlgAbout )
-    #add version back
-    lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %s):</b>" ) % self.get_version() ) )
-    lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "    This plugin takes single qml style and\napplies it to multiple raster or vector layers" ) ) )
-    lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Developers:</b>" ) ) )
-    lines.addWidget( QLabel( "    Lynx (alex-86p@yandex.ru)" ) )
-    lines.addWidget( QLabel( "    Maxim Dubinin (sim@gis-lab.info)" ) )
-    lines.addWidget( QLabel( "    Alexander Bruy" ) )
-    lines.addWidget( QLabel( QApplication.translate("MultiQmlPlugin", "<b>Link:</b>") ) )
-    linkPage = QLabel( "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>" )
-    linkPage.setOpenExternalLinks( True )
-    lines.addWidget( linkPage )
-    linkBugs = QLabel( "<a href=\"https://github.com/nextgis/MultiQML\">https://github.com/nextgis/MultiQML</a>")
-    linkBugs.setOpenExternalLinks( True )
-    lines.addWidget( linkBugs )
+    def unload(self):
+        self.iface.removePluginMenu(QApplication.translate("MultiQmlPlugin", "&MultiQml"), self.actionRun)
+        self.iface.removePluginMenu(QApplication.translate("MultiQmlPlugin", "&MultiQml"), self.actionAbout)
+        self.iface.removeToolBarIcon(self.actionRun)
 
-    pbnClose = QPushButton(QApplication.translate("MultiQmlPlugin", "Close"))
-    lines.addWidget(pbnClose)
+    def run(self):
+        if not self.isMultiQmlRun:
+            self.isMultiQmlRun = True
+            dlgMain = MultiQmlDlg(self.iface.mainWindow(), self.iface)
+            dlgMain.show()
+            dlgMain.exec_()
+            self.isMultiQmlRun = False
 
-    QObject.connect(pbnClose, SIGNAL("clicked()"), dlgAbout, SLOT("close()"))
+    def about(self):
+        dlgAbout = QDialog()
+        dlgAbout.setWindowTitle(QApplication.translate("MultiQmlPlugin", "About", "Window title"))
+        lines = QVBoxLayout(dlgAbout)
+        # add version back
+        lines.addWidget(
+            QLabel(QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %s):</b>") % self.get_version()))
+        lines.addWidget(QLabel(QApplication.translate("MultiQmlPlugin",
+                                                      "    This plugin takes single qml style and\napplies it to multiple raster or vector layers")))
+        lines.addWidget(QLabel(QApplication.translate("MultiQmlPlugin", "<b>Developers:</b>")))
+        lines.addWidget(QLabel("    Lynx (alex-86p@yandex.ru)"))
+        lines.addWidget(QLabel("    Maxim Dubinin (sim@gis-lab.info)"))
+        lines.addWidget(QLabel("    Alexander Bruy"))
+        lines.addWidget(QLabel(QApplication.translate("MultiQmlPlugin", "<b>Link:</b>")))
+        linkPage = QLabel(
+            "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>")
+        linkPage.setOpenExternalLinks(True)
+        lines.addWidget(linkPage)
+        linkBugs = QLabel("<a href=\"https://github.com/nextgis/MultiQML\">https://github.com/nextgis/MultiQML</a>")
+        linkBugs.setOpenExternalLinks(True)
+        lines.addWidget(linkBugs)
 
-    dlgAbout.exec_()
+        pbnClose = QPushButton(QApplication.translate("MultiQmlPlugin", "Close"))
+        lines.addWidget(pbnClose)
 
-  def get_version(self):
-    try:
-      CURR_PATH = os.path.dirname(__file__)
-      cp = ConfigParser()
-      cp.readfp(open(os.path.join(CURR_PATH, 'metadata.txt')))
-      return cp.get('general', 'version')
-    except:
-      return '?'
+        pbnClose.clicked.connect(dlgAbout.close)
 
+        dlgAbout.exec_()
 
+    def get_version(self):
+        try:
+            CURR_PATH = os.path.dirname(__file__)
+            cp = ConfigParser()
+            cp.readfp(open(os.path.join(CURR_PATH, 'metadata.txt')))
+            return cp.get('general', 'version')
+        except:
+            return '?'
