@@ -49,27 +49,17 @@ class MultiQmlPlugin():
     def __init__(self, iface):
         self.iface = iface
 
-        userPluginPath = QFileInfo(
-            QgsApplication.qgisUserDatabaseFilePath()).path() + \
-                         '/python/plugins/multiqml'
-        systemPluginPath = QgsApplication.prefixPath() + \
-                           '/python/plugins/multiqml'
+        # Save reference to the QGIS interface
+        self.iface = iface
+        # initialize plugin directory
+        self.plugin_dir = os.path.dirname(__file__)
+        # initialize locale
+        locale = QSettings().value('locale/userLocale')[0:2]
+        self.localePath = os.path.join(
+            self.plugin_dir,
+            'i18n',
+            'multiqml_{}.qm'.format(locale))
 
-        overrideLocale = QSettings().value('locale/overrideFlag', False,
-                                           type=bool)
-        if not overrideLocale:
-            localeFullName = QLocale.system().name()
-        else:
-            localeFullName = QSettings().value('locale/userLocale', '')
-
-        if QFileInfo(userPluginPath).exists():
-            translationPath = userPluginPath + '/i18n/multiqml_' + \
-                              localeFullName + '.qm'
-        else:
-            translationPath = systemPluginPath + '/i18n/multiqml_' + \
-                              localeFullName + '.qm'
-
-        self.localePath = translationPath
         if QFileInfo(self.localePath).exists():
             self.translator = QTranslator()
             self.translator.load(self.localePath)
