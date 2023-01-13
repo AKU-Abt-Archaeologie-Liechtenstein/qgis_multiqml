@@ -1,7 +1,7 @@
 [general]
 name = MultiQml
 description = Apply a style from a QML file to multiple raster or vector layers
-about=Run a plugin and select an existing QML style file to apply it to multiple raster or vector layers to make them appear to be the same.
+about=Select an existing QML style file to apply it to multiple raster or vector layers to make them appear to be the same. Developed by NextGIS. Any feedback is welcome at https://nextgis.com/contact
 category = Plugins
 version = 0.6.0
 qgisMinimumVersion = 3.0
