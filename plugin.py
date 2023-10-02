@@ -41,6 +41,7 @@ from qgis.PyQt.QtWidgets import (QAction,
                                  )
 
 from .multiqml import MultiQmlDlg
+from . import about_dialog
 
 from . import resources
 
@@ -95,33 +96,8 @@ class MultiQmlPlugin():
             self.isMultiQmlRun = False
 
     def about(self):
-        dlgAbout = QDialog()
-        dlgAbout.setWindowTitle(QApplication.translate("MultiQmlPlugin", "About", "Window title"))
-        lines = QVBoxLayout(dlgAbout)
-        # add version back
-        lines.addWidget(
-            QLabel(QApplication.translate("MultiQmlPlugin", "<b>MultiQml (Version %s):</b>") % self.get_version()))
-        lines.addWidget(QLabel(QApplication.translate("MultiQmlPlugin",
-                                                      "    This plugin takes single qml style and\napplies it to multiple raster or vector layers")))
-        lines.addWidget(QLabel(QApplication.translate("MultiQmlPlugin", "<b>Developers:</b>")))
-        lines.addWidget(QLabel("    Lynx (alex-86p@yandex.ru)"))
-        lines.addWidget(QLabel("    Maxim Dubinin (sim@gis-lab.info)"))
-        lines.addWidget(QLabel("    Alexander Bruy"))
-        lines.addWidget(QLabel(QApplication.translate("MultiQmlPlugin", "<b>Link:</b>")))
-        linkPage = QLabel(
-            "<a href=\"http://gis-lab.info/qa/qgis-multiqml-eng.html\">http://gis-lab.info/qa/qgis-multiqml-eng.html</a>")
-        linkPage.setOpenExternalLinks(True)
-        lines.addWidget(linkPage)
-        linkBugs = QLabel("<a href=\"https://github.com/nextgis/MultiQML\">https://github.com/nextgis/MultiQML</a>")
-        linkBugs.setOpenExternalLinks(True)
-        lines.addWidget(linkBugs)
-
-        pbnClose = QPushButton(QApplication.translate("MultiQmlPlugin", "Close"))
-        lines.addWidget(pbnClose)
-
-        pbnClose.clicked.connect(dlgAbout.close)
-
-        dlgAbout.exec_()
+        dlg = about_dialog.AboutDialog(os.path.basename(self.plugin_dir))
+        dlg.exec_()
 
     def get_version(self):
         try:
