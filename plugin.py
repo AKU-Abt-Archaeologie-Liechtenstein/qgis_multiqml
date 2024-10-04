@@ -32,13 +32,14 @@ from qgis.PyQt.QtCore import *
 from qgis.PyQt.QtGui import *
 from qgis.core import *
 from qgis.gui import *
-from qgis.PyQt.QtWidgets import (QAction,
-                                 QApplication,
-                                 QLabel,
-                                 QDialog,
-                                 QVBoxLayout,
-                                 QPushButton,
-                                 )
+from qgis.PyQt.QtWidgets import (
+    QAction,
+    QApplication,
+    QLabel,
+    QDialog,
+    QVBoxLayout,
+    QPushButton,
+)
 
 from .multiqml import MultiQmlDlg
 from . import about_dialog
@@ -46,7 +47,7 @@ from . import about_dialog
 from . import resources
 
 
-class MultiQmlPlugin():
+class MultiQmlPlugin:
     def __init__(self, iface):
         self.iface = iface
 
@@ -55,11 +56,10 @@ class MultiQmlPlugin():
         # initialize plugin directory
         self.plugin_dir = os.path.dirname(__file__)
         # initialize locale
-        locale = QSettings().value('locale/userLocale')[0:2]
+        locale = QSettings().value("locale/userLocale")[0:2]
         self.localePath = os.path.join(
-            self.plugin_dir,
-            'i18n',
-            'multiqml_{}.qm'.format(locale))
+            self.plugin_dir, "i18n", "multiqml_{}.qm".format(locale)
+        )
 
         if QFileInfo(self.localePath).exists():
             self.translator = QTranslator()
@@ -67,24 +67,46 @@ class MultiQmlPlugin():
             QCoreApplication.installTranslator(self.translator)
 
     def initGui(self):
-        self.actionRun = QAction(QIcon(":/plugins/multiqml/icon.png"), \
-                                 QApplication.translate("MultiQmlPlugin", "MultiQml"), self.iface.mainWindow())
+        self.actionRun = QAction(
+            QIcon(":/plugins/multiqml/icon.png"),
+            QApplication.translate("MultiQmlPlugin", "MultiQml"),
+            self.iface.mainWindow(),
+        )
         self.actionRun.setWhatsThis(
-            QApplication.translate("MultiQmlPlugin", "Apply single qml style to multiple raster or vector layers"))
-        self.actionAbout = QAction(QApplication.translate("MultiQmlPlugin", "About"), self.iface.mainWindow())
+            QApplication.translate(
+                "MultiQmlPlugin",
+                "Apply single qml style to multiple raster or vector layers",
+            )
+        )
+        self.actionAbout = QAction(
+            QApplication.translate("MultiQmlPlugin", "About"),
+            self.iface.mainWindow(),
+        )
 
         self.actionRun.triggered.connect(self.run)
         self.actionAbout.triggered.connect(self.about)
 
         self.iface.addToolBarIcon(self.actionRun)
-        self.iface.addPluginToMenu(QApplication.translate("MultiQmlPlugin", "&MultiQml"), self.actionRun)
-        self.iface.addPluginToMenu(QApplication.translate("MultiQmlPlugin", "&MultiQml"), self.actionAbout)
+        self.iface.addPluginToMenu(
+            QApplication.translate("MultiQmlPlugin", "&MultiQml"),
+            self.actionRun,
+        )
+        self.iface.addPluginToMenu(
+            QApplication.translate("MultiQmlPlugin", "&MultiQml"),
+            self.actionAbout,
+        )
 
         self.isMultiQmlRun = False
 
     def unload(self):
-        self.iface.removePluginMenu(QApplication.translate("MultiQmlPlugin", "&MultiQml"), self.actionRun)
-        self.iface.removePluginMenu(QApplication.translate("MultiQmlPlugin", "&MultiQml"), self.actionAbout)
+        self.iface.removePluginMenu(
+            QApplication.translate("MultiQmlPlugin", "&MultiQml"),
+            self.actionRun,
+        )
+        self.iface.removePluginMenu(
+            QApplication.translate("MultiQmlPlugin", "&MultiQml"),
+            self.actionAbout,
+        )
         self.iface.removeToolBarIcon(self.actionRun)
 
     def run(self):
@@ -103,7 +125,7 @@ class MultiQmlPlugin():
         try:
             CURR_PATH = os.path.dirname(__file__)
             cp = ConfigParser()
-            cp.readfp(open(os.path.join(CURR_PATH, 'metadata.txt')))
-            return cp.get('general', 'version')
+            cp.readfp(open(os.path.join(CURR_PATH, "metadata.txt")))
+            return cp.get("general", "version")
         except:
-            return '?'
+            return "?"

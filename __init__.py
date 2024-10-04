@@ -25,6 +25,8 @@
 #
 # ******************************************************************************
 
+
 def classFactory(iface):
     from .plugin import MultiQmlPlugin
+
     return MultiQmlPlugin(iface)

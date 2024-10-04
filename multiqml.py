@@ -30,11 +30,12 @@ import tempfile
 
 from qgis.PyQt.QtCore import *
 from qgis.core import *
-from qgis.PyQt.QtWidgets import (QDialog,
-                                 QMessageBox,
-                                 QFileDialog,
-                                 QAbstractItemView,
-                                 )
+from qgis.PyQt.QtWidgets import (
+    QDialog,
+    QMessageBox,
+    QFileDialog,
+    QAbstractItemView,
+)
 
 from .multiqml_ui_base import Ui_MultiQmlForm
 
@@ -63,10 +64,15 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 
     def showWarning(self):
         if self.checkMakeDefault.checkState() == Qt.Checked:
-            res = QMessageBox.warning(self, QCoreApplication.translate("MultiQmlDlg", "MultiQML"),
-                                      QCoreApplication.translate("MultiQmlDlg",
-                                                                 "Enabling this option will cause overwriting of any existing QML files. Are you sure?"),
-                                      QMessageBox.Yes | QMessageBox.No)
+            res = QMessageBox.warning(
+                self,
+                QCoreApplication.translate("MultiQmlDlg", "MultiQML"),
+                QCoreApplication.translate(
+                    "MultiQmlDlg",
+                    "Enabling this option will cause overwriting of any existing QML files. Are you sure?",
+                ),
+                QMessageBox.Yes | QMessageBox.No,
+            )
             if res != QMessageBox.Yes:
                 self.checkMakeDefault.setCheckState(Qt.Unchecked)
         return
@@ -86,9 +92,14 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
             return result
 
         myLastUsedDir = self.settings.value("lastStyleDir")
-        self.fileNameStyle = QFileDialog.getOpenFileName(self, QCoreApplication.translate("MultiQmlDlg", "Open style"),
-                                                         myLastUsedDir, QCoreApplication.translate("MultiQmlDlg",
-                                                                                                   "QGIS apply style file (*.qml)"))[0]
+        self.fileNameStyle = QFileDialog.getOpenFileName(
+            self,
+            QCoreApplication.translate("MultiQmlDlg", "Open style"),
+            myLastUsedDir,
+            QCoreApplication.translate(
+                "MultiQmlDlg", "QGIS apply style file (*.qml)"
+            ),
+        )[0]
 
         if self.fileNameStyle != "":
             selected = self.lvMapLayers.selectedIndexes()
@@ -97,19 +108,36 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
                 layer = self.mapLayers[i.row()]
 
                 if (layer.type() == QgsMapLayer.VectorLayer) and isRasterQml():
-                    self.myPluginMessage(QCoreApplication.translate("MultiQmlDlg",
-                                                                    f"Unable to apply raster qml style \"{self.fileNameStyle}\" to vector layer \"{layer.name()}\"."), "critical")
+                    self.myPluginMessage(
+                        QCoreApplication.translate(
+                            "MultiQmlDlg",
+                            f'Unable to apply raster qml style "{self.fileNameStyle}" to vector layer "{layer.name()}".',
+                        ),
+                        "critical",
+                    )
                     continue
-                elif (layer.type() == QgsMapLayer.RasterLayer) and not isRasterQml():
-                    self.myPluginMessage(QCoreApplication.translate("MultiQmlDlg",
-                                                                    f"Unable to apply vector qml style \"{self.fileNameStyle}\" to raster layer \"{layer.name()}\"."), "critical")
+                elif (
+                    layer.type() == QgsMapLayer.RasterLayer
+                ) and not isRasterQml():
+                    self.myPluginMessage(
+                        QCoreApplication.translate(
+                            "MultiQmlDlg",
+                            f'Unable to apply vector qml style "{self.fileNameStyle}" to raster layer "{layer.name()}".',
+                        ),
+                        "critical",
+                    )
                     continue
 
                 message, isLoaded = layer.loadNamedStyle(self.fileNameStyle)
 
                 if not isLoaded:
-                    self.myPluginMessage(QCoreApplication.translate("MultiQmlDlg",
-                                                                    f"Unable to apply qml style \"{self.fileNameStyle}\" to layer \"{layer.name()}\"\n{message}."), "critical")
+                    self.myPluginMessage(
+                        QCoreApplication.translate(
+                            "MultiQmlDlg",
+                            f'Unable to apply qml style "{self.fileNameStyle}" to layer "{layer.name()}"\n{message}.',
+                        ),
+                        "critical",
+                    )
 
                 if self.checkMakeDefault.isChecked():
                     msg, res = layer.saveDefaultStyle()
@@ -119,9 +147,16 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
 
             # mapCanvas refresh is not working anymore
             # self.iface.mapCanvas().refresh()
-            self.settings.setValue("lastStyleDir", os.path.dirname(unicode(self.fileNameStyle)))
+            self.settings.setValue(
+                "lastStyleDir", os.path.dirname(unicode(self.fileNameStyle))
+            )
         else:
-            self.myPluginMessage(QCoreApplication.translate("MultiQmlDlg", "A style was not applied."), "information")
+            self.myPluginMessage(
+                QCoreApplication.translate(
+                    "MultiQmlDlg", "A style was not applied."
+                ),
+                "information",
+            )
 
     @pyqtSlot()
     def on_pbnRestoreDefaultStyle_clicked(self):
@@ -129,9 +164,17 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
         for i in selected:
             layer = self.mapLayers[i.row()]
 
-            message, isLoaded = layer.loadNamedStyle(self.tmpQmlSrcList[i.row()])
-            if not isLoaded: self.myPluginMessage(
-                QCoreApplication.translate("MultiQmlDlg", f"Unable to restory an initial style for layer \"{layer.name()}\"\n{message}."), "critical")
+            message, isLoaded = layer.loadNamedStyle(
+                self.tmpQmlSrcList[i.row()]
+            )
+            if not isLoaded:
+                self.myPluginMessage(
+                    QCoreApplication.translate(
+                        "MultiQmlDlg",
+                        f'Unable to restory an initial style for layer "{layer.name()}"\n{message}.',
+                    ),
+                    "critical",
+                )
             if self.checkMakeDefault.isChecked():
                 msg, res = layer.saveDefaultStyle()
             self.iface.layerTreeView().refreshLayerSymbology(layer.id())
@@ -147,7 +190,7 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
         layersNameList = []
         for i, layer in enumerate(self.mapLayers):
             layersNameList.append(layer.name())
-            self.tmpQmlSrcList.append(tempfile.mktemp('.qml'))
+            self.tmpQmlSrcList.append(tempfile.mktemp(".qml"))
             message, isSaved = layer.saveNamedStyle(self.tmpQmlSrcList[i])
 
         self.lvMapLayers.setModel(QStringListModel(layersNameList, self))
@@ -220,20 +263,34 @@ class MultiQmlDlg(QDialog, Ui_MultiQmlForm):
         self.settings = QSettings("NextGIS", "MultiQml")
         self.resize(self.settings.value("size", QSize(330, 230)))
         # self.move(self.settings.value("pos", QPoint(0, 0)))  # May cause an error on first run
-        self.rbnRasterLayers.setChecked(self.settings.value("isRasterChecked", True, type=bool))
-        self.rbnVectorLayers.setChecked(self.settings.value("isVectorChecked", False, type=bool))
+        self.rbnRasterLayers.setChecked(
+            self.settings.value("isRasterChecked", True, type=bool)
+        )
+        self.rbnVectorLayers.setChecked(
+            self.settings.value("isVectorChecked", False, type=bool)
+        )
         # self.checkMakeDefault.setCheckState( self.settings.value( "saveDefault", 0, type=int ) )
 
     def writeSettings(self):
         self.settings = QSettings("NextGIS", "MultiQml")
         self.settings.setValue("size", self.size())
         self.settings.setValue("pos", self.pos())
-        self.settings.setValue("isRasterChecked", self.rbnRasterLayers.isChecked())
-        self.settings.setValue("isVectorChecked", self.rbnVectorLayers.isChecked())
+        self.settings.setValue(
+            "isRasterChecked", self.rbnRasterLayers.isChecked()
+        )
+        self.settings.setValue(
+            "isVectorChecked", self.rbnVectorLayers.isChecked()
+        )
         # self.settings.setValue( "saveDefault", self.checkMakeDefault.checkState() )
 
     def myPluginMessage(self, msg, type):
         if type == "information":
-            QMessageBox.information(self, QCoreApplication.translate("MultiQmlDlg", "Information"), msg)
+            QMessageBox.information(
+                self,
+                QCoreApplication.translate("MultiQmlDlg", "Information"),
+                msg,
+            )
         elif type == "critical":
-            QMessageBox.critical(self, QCoreApplication.translate("MultiQmlDlg", "Error"), msg)
+            QMessageBox.critical(
+                self, QCoreApplication.translate("MultiQmlDlg", "Error"), msg
+            )

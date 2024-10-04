@@ -15,21 +15,31 @@ class Ui_MultiQmlForm(object):
     def setupUi(self, MultiQmlForm):
         MultiQmlForm.setObjectName("MultiQmlForm")
         MultiQmlForm.resize(278, 206)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(MultiQmlForm.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            MultiQmlForm.sizePolicy().hasHeightForWidth()
+        )
         MultiQmlForm.setSizePolicy(sizePolicy)
-        MultiQmlForm.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
+        MultiQmlForm.setLocale(
+            QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates)
+        )
         MultiQmlForm.setSizeGripEnabled(False)
         MultiQmlForm.setModal(False)
         self.gridLayout = QtWidgets.QGridLayout(MultiQmlForm)
         self.gridLayout.setObjectName("gridLayout")
         self.label = QtWidgets.QLabel(MultiQmlForm)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.label.sizePolicy().hasHeightForWidth()
+        )
         self.label.setSizePolicy(sizePolicy)
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
@@ -42,13 +52,19 @@ class Ui_MultiQmlForm(object):
         self.rbnVectorLayers.setObjectName("rbnVectorLayers")
         self.gridLayout.addWidget(self.rbnVectorLayers, 0, 2, 1, 1)
         self.lvMapLayers = QtWidgets.QListView(MultiQmlForm)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.lvMapLayers.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.lvMapLayers.sizePolicy().hasHeightForWidth()
+        )
         self.lvMapLayers.setSizePolicy(sizePolicy)
         self.lvMapLayers.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.lvMapLayers.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.lvMapLayers.setSelectionMode(
+            QtWidgets.QAbstractItemView.ExtendedSelection
+        )
         self.lvMapLayers.setObjectName("lvMapLayers")
         self.gridLayout.addWidget(self.lvMapLayers, 1, 0, 2, 1)
         self.verticalLayout = QtWidgets.QVBoxLayout()
@@ -75,7 +91,9 @@ class Ui_MultiQmlForm(object):
         QtCore.QMetaObject.connectSlotsByName(MultiQmlForm)
         MultiQmlForm.setTabOrder(self.pbnApplyStyle, self.lvMapLayers)
         MultiQmlForm.setTabOrder(self.lvMapLayers, self.pbnRestoreDefaultStyle)
-        MultiQmlForm.setTabOrder(self.pbnRestoreDefaultStyle, self.pbnSelectAllLayers)
+        MultiQmlForm.setTabOrder(
+            self.pbnRestoreDefaultStyle, self.pbnSelectAllLayers
+        )
         MultiQmlForm.setTabOrder(self.pbnSelectAllLayers, self.rbnRasterLayers)
         MultiQmlForm.setTabOrder(self.rbnRasterLayers, self.rbnVectorLayers)
         MultiQmlForm.setTabOrder(self.rbnVectorLayers, self.pbnClose)
@@ -86,15 +104,24 @@ class Ui_MultiQmlForm(object):
         self.label.setText(_translate("MultiQmlForm", "Layers:"))
         self.rbnRasterLayers.setText(_translate("MultiQmlForm", "Raster"))
         self.rbnVectorLayers.setText(_translate("MultiQmlForm", "Vector"))
-        self.pbnApplyStyle.setText(_translate("MultiQmlForm", "Apply style ..."))
-        self.pbnRestoreDefaultStyle.setText(_translate("MultiQmlForm", "Restore initial style"))
-        self.pbnSelectAllLayers.setText(_translate("MultiQmlForm", "Select all layers"))
+        self.pbnApplyStyle.setText(
+            _translate("MultiQmlForm", "Apply style ...")
+        )
+        self.pbnRestoreDefaultStyle.setText(
+            _translate("MultiQmlForm", "Restore initial style")
+        )
+        self.pbnSelectAllLayers.setText(
+            _translate("MultiQmlForm", "Select all layers")
+        )
         self.pbnClose.setText(_translate("MultiQmlForm", "Close"))
-        self.checkMakeDefault.setText(_translate("MultiQmlForm", "Save as default"))
+        self.checkMakeDefault.setText(
+            _translate("MultiQmlForm", "Save as default")
+        )
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MultiQmlForm = QtWidgets.QDialog()
     ui = Ui_MultiQmlForm()
