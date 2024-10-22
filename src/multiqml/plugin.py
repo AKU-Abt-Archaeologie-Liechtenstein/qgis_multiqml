@@ -114,12 +114,12 @@ class MultiQmlPlugin:
             self.isMultiQmlRun = True
             dlgMain = MultiQmlDlg(self.iface.mainWindow(), self.iface)
             dlgMain.show()
-            dlgMain.exec_()
+            dlgMain.exec()
             self.isMultiQmlRun = False
 
     def about(self):
         dlg = about_dialog.AboutDialog(os.path.basename(self.plugin_dir))
-        dlg.exec_()
+        dlg.exec()
 
     def get_version(self):
         try:
