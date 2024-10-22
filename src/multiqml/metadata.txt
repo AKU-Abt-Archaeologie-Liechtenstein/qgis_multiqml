@@ -9,7 +9,7 @@ version = 0.6.0
 qgisMinimumVersion = 3.0
 qgisMaximumVersion = 3.99
 
-icon = icon.png
+icon = icons/icon.png
 
 author = NextGIS
 authorName = NextGIS

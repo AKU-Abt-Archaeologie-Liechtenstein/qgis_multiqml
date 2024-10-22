@@ -2,173 +2,187 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru_RU">
 <context>
+    <name>AboutDialog</name>
+    <message>
+        <location filename="../about_dialog.py" line="52"/>
+        <source> by NextGIS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../about_dialog.py" line="170"/>
+        <source>REPORT_END</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../about_dialog.py" line="175"/>
+        <source>Developers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../about_dialog.py" line="176"/>
+        <source>Homepage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../about_dialog.py" line="177"/>
+        <source>Please report bugs at</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../about_dialog.py" line="179"/>
+        <source>bugtracker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../about_dialog.py" line="180"/>
+        <source>Video with an overview of the plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../about_dialog.py" line="181"/>
+        <source>Other helpful services by NextGIS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../about_dialog.py" line="182"/>
+        <source>Convenient up-to-date data extracts for any place in the world</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../about_dialog.py" line="185"/>
+        <source>Fully featured Web GIS service</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AboutDialogBase</name>
     <message>
-        <location filename="../about_dialog_base.ui" line="14"/>
+        <location filename="../ui/about_dialog_base.ui" line="14"/>
         <source>About {plugin_name}</source>
         <translation>О {plugin_name}</translation>
     </message>
     <message>
-        <location filename="../about_dialog_base.ui" line="27"/>
-        <source>&lt;p align=&quot;center&quot;&gt;{plugin_name}&lt;/p&gt;</source>
-        <translation>&lt;p align=&quot;center&quot;&gt;{plugin_name}&lt;/p&gt;</translation>
+        <location filename="../ui/about_dialog_base.ui" line="33"/>
+        <source>Information</source>
+        <translation type="unfinished">Информация</translation>
     </message>
     <message>
-        <location filename="../about_dialog_base.ui" line="40"/>
-        <source>&lt;p&gt;{description}&lt;/p&gt;
-&lt;p&gt;{about}&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;Developers:&lt;/b&gt; &lt;a href=&quot;{main_url}&quot;&gt;{authors}&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;Homepage:&lt;/b&gt; &lt;a href=&quot;{homepage_url}&quot;&gt;{homepage_url}&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;Video with an overview of the plugin:&lt;/b&gt; &lt;a href=&quot;{video_url}&quot;&gt;
-{video_url}&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;Please report bugs at&lt;/b&gt; &lt;a href=&quot;{tracker_url}&quot;&gt;bugtracker&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Other helpful services by NextGIS:
-&lt;ul&gt;&lt;li&gt;&lt;b&gt;Convenient up-to-date data extracts for any place in the world:
-&lt;a href=&quot;{main_url}&quot;&gt;{main_url}&lt;/a&gt;&lt;/b&gt;&lt;/li&gt;
-&lt;li&gt;&lt;b&gt;Fully featured Web GIS service:
-&lt;a href=&quot;{main_url}/nextgis-com/plans&quot;&gt;
-{main_url}/nextgis-com/plans&lt;/a&gt;&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
-&lt;/p&gt;</source>
-        <translation>&lt;p&gt;{description}&lt;/p&gt;
-&lt;p&gt;{about}&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;Разработчики:&lt;/b&gt; &lt;a href=&quot;{main_url}&quot;&gt;{authors}&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;Домашняя страница:&lt;/b&gt; &lt;a href=&quot;{homepage_url}&quot;&gt;{homepage_url}&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;Видео с обзором плагина:&lt;/b&gt; &lt;a href=&quot;{video_url}&quot;&gt;
-{video_url}&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;Пожалуйста, сообщайте о багах в&lt;/b&gt; &lt;a href=&quot;{tracker_url}&quot;&gt;багтрекер&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Другие полезные сервисы NextGIS:
-&lt;ul&gt;&lt;li&gt;&lt;b&gt;Удобная выборка актуальных данных из любой точки мира:
-&lt;a href=&quot;{main_url}&quot;&gt;{main_url}&lt;/a&gt;&lt;/b&gt;&lt;/li&gt;
-&lt;li&gt;&lt;b&gt;Полнофункциональный веб-ГИС-сервис:
-&lt;a href=&quot;{main_url}/nextgis-com/plans&quot;&gt;
-{main_url}/nextgis-com/plans&lt;/a&gt;&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;
-&lt;/p&gt;</translation>
+        <location filename="../ui/about_dialog_base.ui" line="54"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/about_dialog_base.ui" line="72"/>
+        <source>License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/about_dialog_base.ui" line="94"/>
+        <source>Components</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/about_dialog_base.ui" line="116"/>
+        <source>Contributors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/about_dialog_base.ui" line="158"/>
+        <source>{plugin_name}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/about_dialog_base.ui" line="168"/>
+        <source>Version {version}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/about_dialog_base.ui" line="203"/>
+        <source>Support us</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MultiQmlDlg</name>
     <message>
-        <location filename="../multiqml.py" line="66"/>
+        <location filename="../multiqml.py" line="67"/>
         <source>MultiQML</source>
         <translation>MultiQML</translation>
     </message>
     <message>
-        <location filename="../multiqml.py" line="66"/>
-        <source>Enabling this option will cause overwriting of any existing QML files. Are you sure?</source>
-        <translation>Включение приведет к перезаписи существующих файлов QML. Вы уверены?</translation>
-    </message>
-    <message>
-        <location filename="../multiqml.py" line="89"/>
+        <location filename="../multiqml.py" line="95"/>
         <source>Open style</source>
         <translation>Открыть стиль</translation>
     </message>
     <message>
-        <location filename="../multiqml.py" line="89"/>
+        <location filename="../multiqml.py" line="95"/>
         <source>QGIS apply style file (*.qml)</source>
         <translation>QGIS применить стиль (*.qml)</translation>
     </message>
     <message>
-        <location filename="multiqml.py" line="94"/>
-        <source>Unable to apply raster qml style &quot;%1&quot; to vector layer &quot;%2&quot;.</source>
-        <translation type="obsolete">Невозможно применить растровый qml стиль &quot;%1&quot; к векторному слою &quot;%2&quot;.</translation>
-    </message>
-    <message>
-        <location filename="multiqml.py" line="98"/>
-        <source>Unable to apply vector qml style &quot;%1&quot; to raster layer &quot;%2&quot;.</source>
-        <translation type="obsolete">Невозможно применить векторный qml стиль &quot;%1&quot; к растровому слою &quot;%2&quot;.</translation>
-    </message>
-    <message>
-        <location filename="multiqml.py" line="105"/>
-        <source>Unable to apply qml style &quot;%1&quot; to layer &quot;%2&quot;%3.</source>
-        <translation type="obsolete">Невозможно применить qml стиль &quot;%1&quot; к слою &quot;%2&quot;%3.</translation>
-    </message>
-    <message>
-        <location filename="../multiqml.py" line="124"/>
+        <location filename="../multiqml.py" line="154"/>
         <source>A style was not applied.</source>
         <translation>Стиль не был применен.</translation>
     </message>
     <message>
-        <location filename="multiqml.py" line="125"/>
-        <source>Unable to restory an initial style for layer &quot;%1&quot;%2.</source>
-        <translation type="obsolete">Невозможно восстановить начальный стиль для слоя &quot;%1&quot;%2.</translation>
-    </message>
-    <message>
-        <location filename="../multiqml.py" line="237"/>
+        <location filename="../multiqml.py" line="288"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../multiqml.py" line="239"/>
+        <location filename="../multiqml.py" line="294"/>
         <source>Error</source>
         <translation>Ошибка</translation>
-    </message>
-    <message>
-        <location filename="../multiqml.py" line="100"/>
-        <source>Unable to apply raster qml style &quot;{self.fileNameStyle}&quot; to vector layer &quot;{layer.name()}&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../multiqml.py" line="104"/>
-        <source>Unable to apply vector qml style &quot;{self.fileNameStyle}&quot; to raster layer &quot;{layer.name()}&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../multiqml.py" line="111"/>
-        <source>Unable to apply qml style &quot;{self.fileNameStyle}&quot; to layer &quot;{layer.name()}&quot;
-{message}.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../multiqml.py" line="133"/>
-        <source>Unable to restory an initial style for layer &quot;{layer.name()}&quot;
-{message}.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MultiQmlForm</name>
     <message>
-        <location filename="../multiqml_ui_base.py" line="85"/>
+        <location filename="../ui/multiqml_ui_base.ui" line="20"/>
         <source>Assign style</source>
         <translation>Установить стиль</translation>
     </message>
     <message>
-        <location filename="../multiqml_ui_base.py" line="86"/>
+        <location filename="../ui/multiqml_ui_base.ui" line="41"/>
         <source>Layers:</source>
         <translation>Слои:</translation>
     </message>
     <message>
-        <location filename="../multiqml_ui_base.py" line="87"/>
+        <location filename="../ui/multiqml_ui_base.ui" line="51"/>
         <source>Raster</source>
         <translation>Растровые</translation>
     </message>
     <message>
-        <location filename="../multiqml_ui_base.py" line="88"/>
+        <location filename="../ui/multiqml_ui_base.ui" line="64"/>
         <source>Vector</source>
         <translation>Векторные</translation>
     </message>
     <message>
-        <location filename="../multiqml_ui_base.py" line="89"/>
+        <location filename="../ui/multiqml_ui_base.ui" line="92"/>
         <source>Apply style ...</source>
         <translation>Применить стиль ...</translation>
     </message>
     <message>
-        <location filename="../multiqml_ui_base.py" line="90"/>
+        <location filename="../ui/multiqml_ui_base.ui" line="99"/>
         <source>Restore initial style</source>
         <translation>Восстановить начальный стиль</translation>
     </message>
     <message>
-        <location filename="../multiqml_ui_base.py" line="91"/>
+        <location filename="../ui/multiqml_ui_base.ui" line="106"/>
         <source>Select all layers</source>
         <translation>Выбрать все слои</translation>
     </message>
     <message>
-        <location filename="../multiqml_ui_base.py" line="92"/>
+        <location filename="../ui/multiqml_ui_base.ui" line="113"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../multiqml_ui_base.py" line="93"/>
+        <location filename="../ui/multiqml_ui_base.ui" line="122"/>
         <source>Save as default</source>
         <translation>Сохранить по умолчанию</translation>
     </message>
@@ -181,112 +195,14 @@
         <translation>MultiQml</translation>
     </message>
     <message>
-        <location filename="plugin.py" line="71"/>
-        <source>Apply single qml style to multiple raster or vector layers.</source>
-        <translation type="obsolete">Применить один qml стиль к нескольким растровым или векторным слоям.</translation>
-    </message>
-    <message>
-        <location filename="../plugin.py" line="74"/>
+        <location filename="../plugin.py" line="81"/>
         <source>About</source>
         <translation>О модуле...</translation>
     </message>
     <message>
-        <location filename="../plugin.py" line="87"/>
+        <location filename="../plugin.py" line="106"/>
         <source>&amp;MultiQml</source>
         <translation>&amp;MultiQml</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="86"/>
-        <source>&lt;b&gt;MultiQml:&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;MultiQml&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="86"/>
-        <source>    The QGIS plugin for apply single qml style to multiple raster or vector layers.</source>
-        <translation type="obsolete">    Плагин QGIS для применения одного qml стиля к нескольким растровым или векторным слоям.</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="104"/>
-        <source>&lt;b&gt;Developers:&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Разработчики:&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="108"/>
-        <source>&lt;b&gt;Link:&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Ссылка:&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="108"/>
-        <source>    The QGIS plugin for apply single qml style
-    to multiple raster or vector layers.</source>
-        <translation type="obsolete">    Плагин QGIS для применения одного qml стиля
-    к нескольким растровым или векторным слоям.</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="99"/>
-        <source>About</source>
-        <comment>Window title</comment>
-        <translation type="obsolete">Информация</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="99"/>
-        <source>&lt;a href=&quot;http://gis-lab.info/qa/qgis-multiqml-eng.html&quot;&gt;http://gis-lab.info/qa/qgis-multiqml-eng.html&lt;/a&gt;</source>
-        <translation type="obsolete">&lt;a href=&quot;http://gis-lab.info/qa/qgis-multiqml.html&quot;&gt;http://gis-lab.info/qa/qgis-multiqml.html&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="99"/>
-        <source>&lt;b&gt;Developedsfdsrs:&lt;/b&gt;</source>
-        <translation type="obsolete">sdfd</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="102"/>
-        <source>&lt;b&gt;MultiQml (Version %1):&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;MultiQml (Версия %1):&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <location filename="../plugin.py" line="72"/>
-        <source>Apply single qml style to multiple raster or vector layers</source>
-        <translation>Применить один qml стиль к нескольким растровым или векторным слоям</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="103"/>
-        <source>    This plugin takes single qml style and
-applies it to multiple raster or vector layers</source>
-        <translation type="obsolete">Этот плагин применяет один стиль из файла Qml
-к нескольким растровым или векторный слоям</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="116"/>
-        <source>Close</source>
-        <translation type="obsolete">Закрыть</translation>
-    </message>
-</context>
-<context>
-    <name>__init__</name>
-    <message>
-        <location filename="plugin.py" line="116"/>
-        <source>MultiQml</source>
-        <translation type="obsolete">MultiQml</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="116"/>
-        <source>Apply single qml style to multiple raster or vector layers.</source>
-        <translation type="obsolete">Применить один qml стиль к нескольким растровым или векторным слоям.</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="116"/>
-        <source>Version</source>
-        <translation type="obsolete">Версия</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="116"/>
-        <source>Apply single qml style to multiple raster or vector layers</source>
-        <translation type="obsolete">Применить один qml стиль к нескольким растровым или векторным слоям</translation>
-    </message>
-    <message>
-        <location filename="plugin.py" line="116"/>
-        <source>http://gis-lab.info/qa/qgis-multiqml-eng.html</source>
-        <translation type="obsolete">http://gis-lab.info/qa/qgis-multiqml.html</translation>
     </message>
 </context>
 </TS>

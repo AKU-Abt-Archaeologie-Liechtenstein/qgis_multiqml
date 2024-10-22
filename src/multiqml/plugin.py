@@ -68,7 +68,7 @@ class MultiQmlPlugin:
 
     def initGui(self):
         self.actionRun = QAction(
-            QIcon(":/plugins/multiqml/icon.png"),
+            QIcon(":/plugins/multiqml/icons/icon.png"),
             QApplication.translate("MultiQmlPlugin", "MultiQml"),
             self.iface.mainWindow(),
         )
