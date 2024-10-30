@@ -10,7 +10,7 @@ from qgis.PyQt.QtSvg import QSvgWidget
 from qgis.PyQt.QtWidgets import QDialog, QLabel, QWidget
 from qgis.utils import pluginMetadata
 
-from .ui.ui_about_dialog_base import (
+from .ui.about_dialog_base import (
     Ui_AboutDialogBase,
 )
 

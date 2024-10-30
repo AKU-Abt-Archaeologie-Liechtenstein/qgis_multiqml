@@ -37,7 +37,7 @@ from qgis.PyQt.QtWidgets import (
     QAbstractItemView,
 )
 
-from .ui.ui_multiqml_ui_base import Ui_MultiQmlForm
+from .ui.multiqml_ui_base import Ui_MultiQmlForm
 
 
 # create the dialog

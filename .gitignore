@@ -217,7 +217,7 @@ compile_commands.json
 *_qmlcache.qrc
 
 # PyQt
-ui_*.py
+*_base.py
 resources.py
 
 # QGIS
