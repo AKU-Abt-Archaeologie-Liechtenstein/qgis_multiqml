@@ -68,7 +68,7 @@ class MultiQmlPlugin:
 
     def initGui(self):
         self.actionRun = QAction(
-            QIcon(":/plugins/multiqml/icon.png"),
+            QIcon(":/plugins/multiqml/icons/icon.png"),
             QApplication.translate("MultiQmlPlugin", "MultiQml"),
             self.iface.mainWindow(),
         )
@@ -114,12 +114,12 @@ class MultiQmlPlugin:
             self.isMultiQmlRun = True
             dlgMain = MultiQmlDlg(self.iface.mainWindow(), self.iface)
             dlgMain.show()
-            dlgMain.exec_()
+            dlgMain.exec()
             self.isMultiQmlRun = False
 
     def about(self):
         dlg = about_dialog.AboutDialog(os.path.basename(self.plugin_dir))
-        dlg.exec_()
+        dlg.exec()
 
     def get_version(self):
         try:
