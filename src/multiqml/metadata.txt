@@ -5,7 +5,7 @@ description[ru]=Примените стиль из файла QML к неско�
 about=Select an existing QML style file to apply it to multiple raster or vector layers to make them appear to be the same. Developed by NextGIS. Any feedback is welcome at https://nextgis.com/contact
 about[ru]=Выберите существующий файл стиля QML, чтобы применить его к нескольким растровым или векторным слоям, чтобы они выглядели одинаково. Разработан компанией NextGIS. Любые отзывы приветствуются на https://nextgis.com/contact.
 category = Plugins
-version = 0.6.0
+version = 0.7.0
 qgisMinimumVersion = 3.0
 qgisMaximumVersion = 3.99
 
@@ -16,6 +16,9 @@ authorName = NextGIS
 email = info@nextgis.com
 
 changelog=
+      0.7.0
+        * Updated the "About plugin" dialog
+        * Added plugin item to help menu
       0.6.0:
         * Fix translations
       0.5.0:
