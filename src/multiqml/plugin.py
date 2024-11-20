@@ -24,27 +24,24 @@
 # MA 02110-1335 USA.
 #
 # ******************************************************************************
+import os
 from configparser import ConfigParser
 
-import os
-
-from qgis.PyQt.QtCore import *
-from qgis.PyQt.QtGui import *
 from qgis.core import *
 from qgis.gui import *
+from qgis.PyQt.QtCore import *
+from qgis.PyQt.QtGui import *
 from qgis.PyQt.QtWidgets import (
     QAction,
     QApplication,
-    QLabel,
     QDialog,
-    QVBoxLayout,
+    QLabel,
     QPushButton,
+    QVBoxLayout,
 )
 
+from . import about_dialog, resources  # noqa: F401
 from .multiqml import MultiQmlDlg
-from . import about_dialog
-
-from . import resources
 
 
 class MultiQmlPlugin:
@@ -95,6 +92,15 @@ class MultiQmlPlugin:
             QApplication.translate("MultiQmlPlugin", "&MultiQml"),
             self.actionAbout,
         )
+
+        self.__show_help_action = QAction(
+            QIcon(":/plugins/multiqml/icons/icon.png"),
+            "MultiQml",
+        )
+        self.__show_help_action.triggered.connect(self.about)
+        plugin_help_menu = self.iface.pluginHelpMenu()
+        assert plugin_help_menu is not None
+        plugin_help_menu.addAction(self.__show_help_action)
 
         self.isMultiQmlRun = False
 

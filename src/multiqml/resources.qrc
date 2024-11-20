@@ -1,6 +1,6 @@
 <RCC>
   <qresource prefix="/plugins/multiqml">
+    <file>icons/nextgis_logo.svg</file>
     <file>icons/icon.png</file>
   </qresource>
 </RCC>
-
